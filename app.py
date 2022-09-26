@@ -18,4 +18,4 @@ fig = go.Figure(data=go.Ohlc(x=df_market.timestamp,
                     high=df_market.high,
                     low=df_market.low,
                     close=df_market.close))
-st.pyplot(fig)
+st.plotly_chart(fig, use_container_width=True)
