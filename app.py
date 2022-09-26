@@ -5,6 +5,21 @@ import plotly.graph_objects as go
 import streamlit as st
 from plotly.subplots import make_subplots
 
+symbol_list=['BTC', 'ETH', 'USDT', 'USDC', 'BNB', 'XRP', 'BUSD', 'ADA', 'SOL', 'DOGE']
+
+# Draw a title and some text to the app:
+'''
+# This is the document title
+
+This is some _markdown_.
+'''
+
+option = st.selectbox(
+    'How would you like to be contacted?',
+    (symbol_list))
+
+You selected:, option
+
 
 phemex= ccxt.phemex() # utilizo phemex Exchange Markets
 symbol='BTCUSD' # simbolo de la moneda
