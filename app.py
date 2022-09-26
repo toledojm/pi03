@@ -21,7 +21,6 @@ fig = go.Figure(data=go.Ohlc(x=df_market.timestamp,
                     close=df_market.close))
 
 
-fig2= px.bar(df_market.volume)
 
 st.plotly_chart(fig, use_container_width=True)
-st.bar_chart(fig2, use_container_width=True)
+st.bar_chart(df_market.volume, use_container_width=True)
