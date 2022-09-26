@@ -20,8 +20,6 @@ fig = go.Figure(data=go.Ohlc(x=df_market.timestamp,
                     low=df_market.low,
                     close=df_market.close))
 
-fig.add_bar(x=df_market.timestamp, y=df_market.volume)  
-
-
+fig.add_trace(x=df_market.timestamp, y=df_market.volume)
 
 st.plotly_chart(fig)
