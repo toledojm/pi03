@@ -15,14 +15,17 @@ This is some _markdown_.
 '''
 
 option = st.selectbox(
-    'How would you like to be contacted?',
+    'Elejir la cripto para conocer su historial',
     (symbol_list))
 
 'You selected:', option
 
+genre = st.radio(
+    "elija el intervalo de tiempo para graficar el historial",
+    ({'1m': '1min', '5m': '5min', '15m': '15min', '30m': '30min', '1h': '60min', '1d': '1day', '1w': '1week', '1M': '1mon', '1y': '1year'}))
 
 phemex= ccxt.phemex() # utilizo phemex Exchange Markets
-symbol='BTCUSD' # simbolo de la moneda
+symbol=option # simbolo de la moneda
 timeframe='1d'
 limit=500
 bars=phemex.fetch_ohlcv(symbol,timeframe=timeframe,limit=limit) #fetches historical candlestick data containing the open, high, low, and close price, and the volume of a market
