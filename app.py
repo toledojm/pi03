@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 import streamlit as st
 from plotly.subplots import make_subplots
 
-symbol_list=['BTC', 'ETH', 'USDT', 'USDC', 'BNB', 'XRP', 'BUSD', 'ADA', 'SOL', 'DOGE']
+symbol_list=['BTCUSD', 'ETHUSD', 'USDTUSD', 'USDCUSD', 'BNBUSD', 'XRPUSD', 'BUSDUSD', 'ADAUSD', 'SOLUSD', 'DOGEUSD']
 
 # Draw a title and some text to the app:
 '''
