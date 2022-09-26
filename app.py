@@ -26,4 +26,7 @@ fig.add_trace(go.Bar(x=df_market.timestamp,
                      y=df_market.volume
                     ), row=2, col=1)
 
+fig.update_yaxes(title_text="Price", row=1, col=1)
+fig.update_yaxes(title_text="Volume", row=2, col=1)
+
 st.plotly_chart(fig)
