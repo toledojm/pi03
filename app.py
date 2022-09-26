@@ -18,7 +18,7 @@ option = st.selectbox(
     'How would you like to be contacted?',
     (symbol_list))
 
-You selected:, option
+'You selected:', option
 
 
 phemex= ccxt.phemex() # utilizo phemex Exchange Markets
