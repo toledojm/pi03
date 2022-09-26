@@ -15,16 +15,25 @@ df_market=pd.DataFrame(bars, columns=['timestamp','open', 'high', 'low', 'close'
 df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
 
 
-fig = make_subplots(rows=2, cols=1)
+# Create subplots and mention plot grid size
+fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
+               vertical_spacing=0.03, subplot_titles=('OHLC', 'Volume'), 
+               row_width=[0.2, 0.7])
 
-fig.append_trace(go.Ohlc(x=df_market.timestamp,
+# Plot OHLC on 1st row
+fig.add_trace(go.Candlestick(x=df_market.timestamp,
                     open=df_market.open,
                     high=df_market.high,
                     low=df_market.low,
-                    close=df_market.close), row=1, col=1)
+                    close=df_market.close, 
+                    name="OHLC"), row=1, col=1)
 
-fig.append_trace(go.Bar(x=df_market.timestamp, 
-                     y=df_market.volume), row=2, col=1)
+# Bar trace for volumes on 2nd row without legend
+fig.add_trace(go.Bar(x=df_market.timestamp,
+                    y=df_market.volume, 
+                    showlegend=False,name="Volume", row=2, col=1)
 
-fig.update_layout(height=600, width=600, title_text="Stacked Subplots")
+# Do not show OHLC's rangeslider plot 
+fig.update(layout_xaxis_rangeslider_visible=False)
+fig.show()
 st.plotly_chart(fig)
