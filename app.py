@@ -14,17 +14,6 @@ bars=phemex.fetch_ohlcv(symbol,timeframe=timeframe,limit=limit) #fetches histori
 df_market=pd.DataFrame(bars, columns=['timestamp','open', 'high', 'low', 'close','volume'])
 df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
 
-'''
-fig = go.Figure(data=go.Ohlc(x=df_market.timestamp,
-                    open=df_market.open,
-                    high=df_market.high,
-                    low=df_market.low,
-                    close=df_market.close))
-
-st.plotly_chart(fig)
-'''
-
-
 
 candlesticks = go.Candlestick(
     x=df_market.timestamp,
