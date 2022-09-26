@@ -19,7 +19,6 @@ st.image(image, caption='cryptocurrency-coins')
 
 En este dashborad se abarcará el mundo de las criptomonedas y sus mercados.
 '''
-
 option = st.selectbox(
     'Elejir la cripto para conocer su historial',
     (symbol_list))

@@ -4,4 +4,3 @@ numpy
 ccxt
 plotly
 matplotlib
-PIL
