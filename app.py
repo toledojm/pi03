@@ -9,7 +9,7 @@ from PIL import Image
 symbol_list=['BTCUSD', 'ETHUSD', 'USDTUSD', 'USDCUSD', 'BNBUSD', 'XRPUSD', 'BUSDUSD', 'ADAUSD', 'SOLUSD', 'DOGEUSD']
 timeframe_list=['1m', '5m', '15m', '30m', '1h', '1d', '1w', '1M']
 from PIL import Image
-image = Image.open('https://superyou.co.id/blog/wp-content/uploads/2021/03/cryptocurrency-coins.jpg')
+image = Image.open('cryptocurrency-coins.jpg')
 
 st.image(image, caption='cryptocurrency-coins')
 
