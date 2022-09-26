@@ -22,11 +22,11 @@ option = st.selectbox(
 
 genre = st.radio(
     "elija el intervalo de tiempo para graficar el historial",
-    ({'1m': '1min', '5m': '5min', '15m': '15min', '30m': '30min', '1h': '60min', '1d': '1day', '1w': '1week', '1M': '1mon', '1y': '1year'}))
+    ('1m', '5m', '15m', '30m', '1h', '1d', '1w', '1M', '1y'))
 
 phemex= ccxt.phemex() # utilizo phemex Exchange Markets
 symbol=option # simbolo de la moneda
-timeframe='1d'
+timeframe=genre
 limit=500
 bars=phemex.fetch_ohlcv(symbol,timeframe=timeframe,limit=limit) #fetches historical candlestick data containing the open, high, low, and close price, and the volume of a market
 df_market=pd.DataFrame(bars, columns=['timestamp','open', 'high', 'low', 'close','volume'])
