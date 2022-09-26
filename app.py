@@ -7,7 +7,7 @@ from plotly.subplots import make_subplots
 from PIL import Image
 
 symbol_list=['BTCUSD', 'ETHUSD', 'USDTUSD', 'USDCUSD', 'BNBUSD', 'XRPUSD', 'BUSDUSD', 'ADAUSD', 'SOLUSD', 'DOGEUSD']
-
+timeframe_list=['1m', '5m', '15m', '30m', '1h', '1d', '1w', '1M']
 from PIL import Image
 image = Image.open('https://superyou.co.id/blog/wp-content/uploads/2021/03/cryptocurrency-coins.jpg')
 
@@ -27,7 +27,7 @@ option = st.selectbox(
 
 genre = st.radio(
     "elija el intervalo de tiempo para graficar el historial",
-    ('1m', '5m', '15m', '30m', '1h', '1d', '1w', '1M'))
+    timeframe_list, horizontal=True)
 
 phemex= ccxt.phemex() # utilizo phemex Exchange Markets
 symbol=option # simbolo de la moneda
