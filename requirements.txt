@@ -3,4 +3,4 @@ pandas
 numpy
 ccxt
 plotly
-matploylib
+matplotlib
