@@ -4,14 +4,20 @@ import numpy as np
 import plotly.graph_objects as go
 import streamlit as st
 from plotly.subplots import make_subplots
+from PIL import Image
 
 symbol_list=['BTCUSD', 'ETHUSD', 'USDTUSD', 'USDCUSD', 'BNBUSD', 'XRPUSD', 'BUSDUSD', 'ADAUSD', 'SOLUSD', 'DOGEUSD']
 
+from PIL import Image
+image = Image.open('https://superyou.co.id/blog/wp-content/uploads/2021/03/cryptocurrency-coins.jpg')
+
+st.image(image, caption='cryptocurrency-coins')
+
 # Draw a title and some text to the app:
 '''
-# This is the document title
+# Ecosistema de criptomonedas
 
-This is some _markdown_.
+En este dashborad se abarcará el mundo de las criptomonedas y sus mercados.
 '''
 
 option = st.selectbox(
