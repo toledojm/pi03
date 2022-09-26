@@ -34,10 +34,10 @@ volume_bars = go.Bar(
 )
 
 fig = go.Figure(candlesticks)
-fig = make_subplots(specs=[[{"secondary_y": True}]])
+#fig = make_subplots(specs=[[{"secondary_y": True}]])
 fig.add_trace(candlesticks, secondary_y=True)
 fig.add_trace(volume_bars, secondary_y=False)
-fig.update_layout(title="ETH/USDC pool after Uniswap v3 deployment", height=800)
+fig.update_layout(title="ETH/USDC pool after Uniswap v3 deployment", height=800, with=1600)
 fig.update_yaxes(title="Price $", secondary_y=True, showgrid=True)
-fig.update_yaxes(title="Volume $", secondary_y=False, showgrid=False)
+#fig.update_yaxes(title="Volume $", secondary_y=False, showgrid=False)
 st.plotly_chart(fig)
