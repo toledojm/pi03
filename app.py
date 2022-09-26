@@ -17,11 +17,11 @@ df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
 
 fig = make_subplots(rows=2, cols=1)
 
-fig.append_trace(go.Figure(data=go.Ohlc(x=df_market.timestamp,
+fig.append_trace(go.Ohlc(x=df_market.timestamp,
                     open=df_market.open,
                     high=df_market.high,
                     low=df_market.low,
-                    close=df_market.close)), row=1, col=1)
+                    close=df_market.close), row=1, col=1)
 
 fig.append_trace(go.Bar(x=df_market.timestamp, 
                      y=df_market.volume), row=2, col=1)
