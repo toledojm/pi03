@@ -73,6 +73,6 @@ fig.add_trace(go.Bar(x=df_market.timestamp,y=df_market.volume,showlegend=False),
 # Do not show OHLC's rangeslider plot 
 fig.update(layout_xaxis_rangeslider_visible=True)
 
-fig.update_layout(height=800, width=1200)
+fig.update_layout(height=700, width=900)
 
 st.plotly_chart(fig)
