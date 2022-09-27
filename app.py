@@ -57,9 +57,9 @@ varianza=np.round(np.var(df_market.close),2)
 volume=np.round(df_market.volume.values[-1],2)
 close=np.round(df_market.close.values[-1],2)
 typical=np.round(df_market.typical.values[-1],2)
-var_close=np.round(df_market.var_close.values[-2],2)
-var_volume=np.round(df_market.var_volume.values[-2],2)
-var_typical=np.round(df_market.var_typical.values[-2],2)
+var_close=np.round(df_market.var_close.values[-2],6)
+var_volume=np.round(df_market.var_volume.values[-2],6)
+var_typical=np.round(df_market.var_typical.values[-2],6)
 
 label_price='Precio'
 label_var='Varianza'
