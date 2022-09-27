@@ -20,7 +20,7 @@ st.image(image,use_column_width=True)
 
 '''# Ecosistema de criptomonedas'''
 
-'A partir de este dashboard se analizarán 10 criptomonedas de la plataforma de exchange FTX'
+'Este dashboard se analizarán 10 criptomonedas de la plataforma de exchange FTX'
 '------------------------------------------------------------------------------------------'
 
 option = st.selectbox(
