@@ -6,7 +6,7 @@ import streamlit as st
 from plotly.subplots import make_subplots
 from PIL import Image
 
-symbol_list=['BTCUSD', 'ETHUSD', 'USDTUSD', 'USDCUSD', 'BNBUSD', 'XRPUSD', 'BUSDUSD', 'ADAUSD', 'SOLUSD', 'DOGEUSD']
+symbol_list=['BTC/USD', 'ETH/USD', 'USDT/USD', 'USDC/USD', 'BNB/USD', 'XRP/USD', 'BUSD/USD', 'ADA/USD', 'SOL/USD', 'DOGE/USD']
 timeframe_list=['1m', '5m', '15m', '30m', '1h', '1d', '1w', '1M']
 
 image = Image.open('cryptocurrency-coins.jpg')
@@ -46,10 +46,6 @@ df_market['typical'] = np.round(np.mean([df_market.high,df_market.low,df_market.
 #VWAP = Cumulative Typical Price x Volume/Cumulative Volume
 #Cumulative = total since the trading session opened
 df_market['VWAP']=np.round(sum(df_market.typical)*df_market.volume/sum(df_market.volume))
-
-
-
-
 
 VWAP_var=np.var(df_market.VWAP)
 
