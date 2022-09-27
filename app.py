@@ -60,7 +60,7 @@ df_market['variation']=df_market.close.pct_change()
 vwap=np.round(df_market.vwap.values[-1],2)
 typical=np.round(df_market.typical.values[-1],4)
 close=np.round(df_market.close.values[-1],4)
-var=np.round(df_market.variation.values[-2],4)
+variation=np.round(df_market.variation.values[-2],4)
 
 var=np.var(df_market.close)
 label_price=str(symbol+' Precio')
@@ -70,7 +70,7 @@ label_vwap='Precio Medio Ponderado \n por Volumen (VWAP)'
 
 
 col1, col2, col3 = st.columns(3)
-col1.metric(label_price, close,var)
+col1.metric(label_price, close,variation)
 col2.metric(label_var, typical)
 col3.metric(label_vwap, vwap)
 
