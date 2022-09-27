@@ -18,6 +18,8 @@ BNB= 'BNB se lanzó a través de una oferta inicial de monedas en 2017, 11 días
 XRP= 'XRP es la criptomoneda nativa de Ripple, un sistema de pago de criptomonedas creado por Ripple Labs Inc. XRP es su "activo digital creado para pagos globales", lo que implica que Ripple planea rivalizar con las transferencias de dinero que generalmente realiza el sistema bancario. XRP permitirÁ a los usuarios enviar dinero a un costo muy bajo, atrayendo el interés potencial de clientes minoristas y bancos por igual. Una propuesta de valor clave de Ripple es su minúsculo costo de transacción al tiempo que ofrece una finalidad de transacción de menos de cinco segundos'
 SOL='Solana es un proyecto de código abierto altamente funcional que se basa en la naturaleza sin permiso de la tecnología blockchain para proporcionar soluciones financieras descentralizadas (DeFi). Si bien la idea y el trabajo inicial en el proyecto comenzaron en 2017, Solana fue lanzada oficialmente en marzo de 2020 por la Fundación Solana con sede en Ginebra, Suiza.El protocolo Solana está diseñado para facilitar la creación de aplicaciones descentralizadas (DApp). Su objetivo es mejorar la escalabilidad introduciendo un consenso de prueba de historia (PoH) combinado con el consenso de prueba de participación (PoS) subyacente de la cadena de bloques.Debido al innovador modelo de consenso híbrido, Solana disfruta del interés tanto de los pequeños comerciantes como de los comerciantes institucionales. Un enfoque importante para la Fundación Solana es hacer que las finanzas descentralizadas sean accesibles a mayor escala.'
 DOGE='Dogecoin (DOGE) se basa en el popular meme de Internet "doge" y tiene un Shiba Inu en su logotipo. La moneda digital de código abierto fue creada por Billy Markus de Portland, Oregon y Jackson Palmer de Sydney, Australia, y se bifurcó de Litecoin en diciembre de 2013. Los creadores de Dogecoin la vieron como una criptomoneda divertida y alegre que tendría un mayor atractivo más allá de la audiencia principal de Bitcoin, ya que se basó en un meme de perro. El CEO de Tesla, Elon Musk, publicó varios tuits en las redes sociales en los que decía que Dogecoin era su moneda favorita.'
+
+
 dic={'BTC/USD':BTC,'ETH/USD':ETH,'ADA/USD':ADA,'USDT/USD':USDT,'BNB/USD':BNB,'XRP/USD':XRP,'SOL/USD':SOL,'DOGE/USD':DOGE}
 
 
@@ -100,7 +102,7 @@ fig = make_subplots(rows=2, cols=1, shared_xaxes=True,
                vertical_spacing=0.3, subplot_titles=('OHLC', 'Volume'),
                row_width=[0.4 ,0.8])
 # Plot OHLC on 1st row
-fig.add_trace(go.Ohlc(x=df_market['timestamp'],
+fig.add_trace(go.Candlestick(x=df_market['timestamp'],
                     open=df_market.open,
                     high=df_market.high,
                     low=df_market.low,
@@ -136,5 +138,5 @@ with tab2:
         be random.
     """)
 with tab3:
-    st.dataframe(df_market.round({'open':2, 'high':2, 'low':2, 'close':2,'volume':2,'typical':2,'var_close':4,'var_volume':4,'var_typical':4}))
+    st.dataframe(df_market)
     
