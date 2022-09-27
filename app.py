@@ -28,9 +28,6 @@ option = st.selectbox(
 
 'Se eligio:', option
 
-
-
-
 genre = st.radio(
     "elija el intervalo de tiempo para graficar el historial",
     timeframe_list, horizontal=True)
@@ -78,6 +75,18 @@ col1, col2, col3 = st.columns(3)
 col1.metric(label_price, close,var_close)
 col2.metric(label_volume, millify(volume),var_volume)
 col3.metric(label_var, millify(varianza))
+
+col1, col2= st.columns(2)
+'calculadora criptomoneda->USD'
+cripto = st.number_input('Insertar el valor en moneda cripto')
+conversion_cripto=cripto*close
+col1.write('The current number is ', conversion_cripto)
+
+'calculadora USD->criptomoneda'
+usd = st.number_input('Insertar el valor en moneda USD')
+conversion_usd=usd/close
+col2.write('The current number is ', conversion_usd)
+
 
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
