@@ -55,12 +55,12 @@ df_market=pd.DataFrame(ohlcv, columns=['timestamp','open', 'high', 'low', 'close
 df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
 df_market['typical'] = np.mean([df_market.high,df_market.low,df_market.close],axis=0)
 df_market['vwap']=sum(df_market.typical*df_market.volume)/sum(df_market.volume)
-df_market['var']=df_market.close.pct_change()
+df_market['variation']=df_market.close.pct_change()
 
 vwap=np.round(df_market.vwap.values[-1],2)
 typical=np.round(df_market.typical.values[-1],4)
 close=np.round(df_market.close.values[-1],4)
-var=np.round(df_market.var.values[-1],4)
+var=np.round(df_market.variation.values[-2],4)
 
 var=np.var(df_market.close)
 label_price=str(symbol+' Precio')
