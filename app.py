@@ -40,7 +40,7 @@ option = st.selectbox(
 
 expander = st.expander("información detallada de la criptomoneda seleccionada")
 expander.write(dic[option])
-'------------------------------------------------------------------------------------------'
+
 genre = st.radio(
     "Seleccionar el intervalo de tiempo",
     timeframe_list, horizontal=True)
