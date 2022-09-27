@@ -9,7 +9,7 @@ from PIL import Image
 symbol_list=['BTC/USD', 'ETH/USD', 'USDT/USD', 'USDC/USD', 'BNB/USD', 'XRP/USD', 'BUSD/USD', 'ADA/USD', 'SOL/USD', 'DOGE/USD']
 timeframe_list=['1m', '5m', '15m', '30m', '1h', '1d', '1w', '1M']
 
-image = Image.open('cryptocurrency-coins.jpg')
+image = Image.open('cripto_image.jpg')
 
 st.set_page_config(page_icon="📈", page_title="Crypto Dashboard")
 
