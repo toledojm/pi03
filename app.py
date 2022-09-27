@@ -91,7 +91,7 @@ fig.add_trace(go.Bar(x=df_market.timestamp,y=df_market.volume,showlegend=False),
 fig.update(layout_xaxis_rangeslider_visible=True)
 
 
-tab1, tab2, tab3 = st.tabs(["Historial", "Calculadora", "Tabla"])
+tab1, tab2, tab3 = st.tabs(["Calculadora","Historial", "Tabla"])
 
 with tab1:
     col1, col2= st.columns(2)
@@ -105,7 +105,6 @@ with tab1:
         usd = st.number_input('Insertar el valor en moneda USD')
         conversion_usd=usd/close
         st.write('El valor en USD en la criptomoneda: ', conversion_usd)
-
 with tab2:
     st.plotly_chart(fig, use_container_width=True)
 with tab3:
