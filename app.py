@@ -27,9 +27,7 @@ option = st.selectbox(
 
 'Se eligio:', option
 
-genre = st.radio(
-    "elija el intervalo de tiempo para graficar el historial",
-    timeframe_list, horizontal=True)
+
 
 ftx= ccxt.ftx() # utilizo phemex Exchange Markets
 symbol=option # simbolo de la moneda
@@ -106,6 +104,9 @@ with tab1:
         conversion_usd=usd/close
         st.write('El valor en USD en la criptomoneda: ', conversion_usd)
 with tab2:
+    genre = st.radio(
+    "elija el intervalo de tiempo para graficar el historial",
+    timeframe_list, horizontal=True)
     st.plotly_chart(fig, use_container_width=True)
 with tab3:
     st.dataframe(df_market)
