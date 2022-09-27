@@ -25,10 +25,10 @@ st.image(image,use_column_width=True)
 col1, col2 = st.columns(2)
 with col1:
     option = st.selectbox(
-        'Elejir la cripto para conocer su historial y acceder a su calculadora criptomoneda/USD y viceversa',
+        'Seleccionar de la lista desplegable la criptomoneda a analizar:',
         (symbol_list))
 with col2:
-    'Se eligio:', option
+    '_La selección fue:_', option
 
 genre = st.radio(
     "elija el intervalo de tiempo para graficar el historial",
