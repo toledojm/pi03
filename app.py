@@ -13,7 +13,7 @@ image = Image.open('cripto_image.jpg')
 
 st.set_page_config(page_icon="📈", page_title="Crypto Dashboard")
 
-st.image(image,use_column_width='auto')
+st.image(image,use_column_width=True)
 
 # Draw a title and some text to the app:
 '''
