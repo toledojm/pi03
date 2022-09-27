@@ -19,8 +19,7 @@ st.image(image,use_column_width=True)
 # Draw a title and some text to the app:
 
 '''# Ecosistema de criptomonedas'''
-
-'Este dashboard se analizarán 10 criptomonedas de la plataforma de exchange FTX'
+'_Este dashboard se analizarán 10 criptomonedas de la plataforma de exchange FTX_'
 '------------------------------------------------------------------------------------------'
 col1, col2 = st.columns(2)
 with col1:
@@ -28,7 +27,7 @@ with col1:
         'Seleccionar de la lista desplegable la criptomoneda a analizar:',
         (symbol_list))
 with col2:
-    '_La selección fue:_', option
+    'La selección fue:', option
 
 genre = st.radio(
     "elija el intervalo de tiempo para graficar el historial",
