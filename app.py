@@ -32,16 +32,14 @@ st.image(image,use_column_width=True)
 '''# Ecosistema de criptomonedas'''
 '_Este dashboard analizará 10 criptomonedas de la plataforma de exchange FTX_'
 '------------------------------------------------------------------------------------------'
-col1, col2 = st.columns(2)
-with col1:
-    option = st.selectbox(
+option = st.selectbox(
         'Seleccionar la criptomoneda a analizar',
         (symbol_list))
-with col2:
-    'La selección fue:', option
 
-    expander = st.expander("información detallada de la criptomoneda seleccionada")
-    expander.write(dic[option])
+'La selección fue:', option
+
+expander = st.expander("información detallada de la criptomoneda seleccionada")
+expander.write(dic[option])
 '------------------------------------------------------------------------------------------'
 genre = st.radio(
     "Seleccionar el intervalo de tiempo",
