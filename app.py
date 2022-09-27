@@ -61,12 +61,23 @@ df_market['typical'] = np.mean([df_market.high,df_market.low,df_market.close],ax
 
 df_market['VWAP']=sum(df_market.typical*df_market.volume)/sum(df_market.volume)
 
-vwap=np.round(df_market.VWAP.values[-1],4)
+vwap=np.round(df_market.VWAP.values[-1],2)
 typical=np.round(df_market.typical.values[-1],4)
+close=np.round(df_market.close.values[-1],4)
+media=np.median(df_market.close)
+n=len(df_market)
 
-st.metric(option, vwap)
-st.metric(option, typical)
+var=np.var(df_market.close)
+label_price=str(symbol+' price')
+label_var='Varianza'
+label_vwap='Precio Medio Ponderado por Volumen (VWAP)'
 
+
+
+col1, col2, col3 = st.columns(3)
+col1.metric(label_price, close)
+col2.metric(label_var, typical)
+col3.metric(label_vwap, vwap)
 
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
