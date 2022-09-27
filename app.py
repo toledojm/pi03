@@ -52,7 +52,7 @@ df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
 df_market['var_close']=df_market.close.pct_change()
 df_market['var_volume']=df_market.volume.pct_change()
 
-varianza=np.var(df_market.close)
+varianza=np.round(np.var(df_market.close),2)
 volume=np.round(df_market.volume.values[-1],2)
 close=np.round(df_market.close.values[-1],2)
 var_close=np.round(df_market.var_close.values[-2],2)
