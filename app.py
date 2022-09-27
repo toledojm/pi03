@@ -18,8 +18,8 @@ st.image(image,use_column_width=True)
 
 # Draw a title and some text to the app:
 '''
-## Ecosistema de criptomonedas
-# A partir de este dashboard se analizarán 10 criptomonedas de la plataforma de exchange FTX
+# Ecosistema de criptomonedas
+##A partir de este dashboard se analizarán 10 criptomonedas de la plataforma de exchange FTX
 '''
 option = st.selectbox(
     'Elejir la cripto para conocer su historial y acceder a su calculadora criptomoneda/USD y viceversa',
