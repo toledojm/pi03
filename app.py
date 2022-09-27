@@ -65,7 +65,7 @@ fig.add_trace(go.Candlestick(x=df_market['timestamp'],
                     close=df_market.close, 
                     name="OHLC"), row=1, col=1)
 
-fig = go.Figure(data=go.Ohlc(x=df_market.timestamp,
+fig.add_trace(go.Ohlc(x=df_market['timestamp'],
                     open=df_market.open,
                     high=df_market.high,
                     low=df_market.low,
