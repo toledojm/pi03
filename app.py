@@ -32,7 +32,7 @@ with col2:
 genre = st.radio(
     "Seleccionar el intervalo de tiempo",
     timeframe_list, horizontal=True)
-
+'------------------------------------------------------------------------------------------'
 ftx= ccxt.ftx() # utilizo phemex Exchange Markets
 symbol=option # simbolo de la moneda
 timeframe=genre
@@ -82,7 +82,7 @@ col1.metric(label_price, close,var_close)
 col2.metric(label_volume, millify(volume),var_volume)
 col3.metric(label_var, millify(varianza))
 col4.metric(label_typical, typical, var_typical)
-
+'------------------------------------------------------------------------------------------'
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
                vertical_spacing=0.3, subplot_titles=('OHLC', 'Volume'),
