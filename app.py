@@ -92,7 +92,7 @@ def millify(n):
     return '{:.0f}{}'.format(n / 10**(3 * millidx), millnames[millidx])
 
 col1, col2, col3, col4= st.columns(4)
-col1.metric(label_price, close,var_close)
+col1.metric(label_price, close,"%.2f" %var_close)
 col2.metric(label_volume, millify(volume),var_volume)
 col3.metric(label_var, millify(varianza))
 col4.metric(label_typical, typical,var_typical)
