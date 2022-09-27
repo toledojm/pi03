@@ -55,14 +55,17 @@ df_market=pd.DataFrame(ohlcv, columns=['timestamp','open', 'high', 'low', 'close
 df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
 df_market['typical'] = np.mean([df_market.high,df_market.low,df_market.close],axis=0)
 df_market['vwap']=sum(df_market.typical*df_market.volume)/sum(df_market.volume)
-df_market['variation']=df_market.close.pct_change()
+df_market['var_close']=df_market.close.pct_change()
+df_market['var_vwap']=df_market.vwap.pct_change()
+df_market['var_varianza']=np.var(df_market.close)
 
 vwap=np.round(df_market.vwap.values[-1],2)
-typical=np.round(df_market.typical.values[-1],4)
 close=np.round(df_market.close.values[-1],4)
-variation=np.round(df_market.variation.values[-2],4)
+var_close=np.round(df_market.var_close.values[-2],4)
+var_vwap=np.round(df_market.var_vwap.values[-2],4)
+var_varianza=np.round(df_market.var_varianza.values[-2],4)
 
-var=np.var(df_market.close)
+varianza=np.var(df_market.close)
 label_price=str(symbol+' Precio')
 label_var='Varianza'
 label_vwap='Precio Medio Ponderado \n por Volumen (VWAP)'
@@ -70,9 +73,9 @@ label_vwap='Precio Medio Ponderado \n por Volumen (VWAP)'
 
 
 col1, col2, col3 = st.columns(3)
-col1.metric(label_price, close,variation)
-col2.metric(label_var, typical)
-col3.metric(label_vwap, vwap)
+col1.metric(label_price, close,var_close)
+col2.metric(label_var, varianza,var_varianza)
+col3.metric(label_vwap, vwap,var_vwap)
 
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
