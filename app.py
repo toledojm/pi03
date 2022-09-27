@@ -34,11 +34,11 @@ genre = st.radio(
     "elija el intervalo de tiempo para graficar el historial",
     timeframe_list, horizontal=True)
 
-phemex= ccxt.phemex() # utilizo phemex Exchange Markets
+ftx= ccxt.ftx() # utilizo phemex Exchange Markets
 symbol=option # simbolo de la moneda
 timeframe=genre
 limit=500
-bars=phemex.fetch_ohlcv(symbol,timeframe=timeframe,limit=limit) #fetches historical candlestick data containing the open, high, low, and close price, and the volume of a market
+bars=ftx.fetch_ohlcv(symbol,timeframe=timeframe,limit=limit) #fetches historical candlestick data containing the open, high, low, and close price, and the volume of a market
 df_market=pd.DataFrame(bars, columns=['timestamp','open', 'high', 'low', 'close','volume'])
 df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
 
@@ -49,16 +49,11 @@ df_market['VWAP']=np.round(sum(df_market.typical)*df_market.volume/sum(df_market
 
 
 
-def round_value(input_value):
-    if input_value.values > 1:
-        a = float(round(input_value, 2))
-    else:
-        a = float(round(input_value, 8))
-    return a
 
-VWAP=round_value(df_market.VWAP)
 
-st.metric(option, VWAP)
+VWAP_var=np.var(df_market.VWAP)
+
+st.metric(option, VWAP_var)
 
 
 # Create subplots and mention plot grid size
