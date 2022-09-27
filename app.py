@@ -28,7 +28,7 @@ with col1:
         (symbol_list))
 with col2:
     'La selección fue:', option
-
+'------------------------------------------------------------------------------------------'
 genre = st.radio(
     "Seleccionar el intervalo de tiempo",
     timeframe_list, horizontal=True)
