@@ -23,7 +23,7 @@ dic={'BTC/USD':BTC,'ETH/USD':ETH,'ADA/USD':ADA,'USDT/USD':USDT,'BNB/USD':BNB,'XR
 
 image = Image.open('cripto_image.jpg')
 
-st.set_page_config(page_icon="📈", page_title="Ecosistema de criptomonedas")
+st.set_page_config(page_icon="📈", page_title="Ecosistema de criptomonedas",layout = 'wide')
 
 st.image(image,use_column_width=True)
 
