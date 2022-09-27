@@ -55,7 +55,7 @@ st.metric(option, VWAP_var)
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
                vertical_spacing=0.2, subplot_titles=('OHLC', 'Volume'), 
-               row_width=[3.8 ,2.8])
+               row_width=[3.8 ,1.8])
 
 # Plot OHLC on 1st row
 
@@ -71,5 +71,5 @@ fig.add_trace(go.Ohlc(x=df_market['timestamp'],
 fig.add_trace(go.Bar(x=df_market.timestamp,y=df_market.volume,showlegend=False), row=2, col=1)
 
 # Do not show OHLC's rangeslider plot 
-fig.update(layout_xaxis_rangeslider_visible=False)
+fig.update(layout_xaxis_rangeslider_visible=True)
 st.plotly_chart(fig)
