@@ -8,8 +8,10 @@ from PIL import Image
 
 symbol_list=['BTCUSD', 'ETHUSD', 'USDTUSD', 'USDCUSD', 'BNBUSD', 'XRPUSD', 'BUSDUSD', 'ADAUSD', 'SOLUSD', 'DOGEUSD']
 timeframe_list=['1m', '5m', '15m', '30m', '1h', '1d', '1w', '1M']
-from PIL import Image
+
 image = Image.open('cryptocurrency-coins.jpg')
+
+st.set_page_config(page_icon="📈", page_title="Crypto Dashboard")
 
 st.image(image, caption='cryptocurrency-coins')
 
@@ -17,13 +19,16 @@ st.image(image, caption='cryptocurrency-coins')
 '''
 # Ecosistema de criptomonedas
 
-En este dashborad se abarcará el mundo de las criptomonedas y sus mercados.
+En este dashborad se abarcará el mundo de las criptomonedas y su análisis
 '''
 option = st.selectbox(
     'Elejir la cripto para conocer su historial',
     (symbol_list))
 
-'You selected:', option
+'Se eligio:', option
+
+
+
 
 genre = st.radio(
     "elija el intervalo de tiempo para graficar el historial",
@@ -36,6 +41,15 @@ limit=500
 bars=phemex.fetch_ohlcv(symbol,timeframe=timeframe,limit=limit) #fetches historical candlestick data containing the open, high, low, and close price, and the volume of a market
 df_market=pd.DataFrame(bars, columns=['timestamp','open', 'high', 'low', 'close','volume'])
 df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
+
+df_market['typical'] = np.round(np.mean([df_market.high,df_market.low,df_market.close],axis=0)) # Typical Price = High price + Low price + Closing Price/3
+#VWAP = Cumulative Typical Price x Volume/Cumulative Volume
+#Cumulative = total since the trading session opened
+df_market['VWAP']=np.round(sum(df_market.typical)*df_market.volume/sum(df_market.volume))
+
+VWAP=df_market.VWAP.astype(int)
+
+st.metric(option, VWAP)
 
 
 # Create subplots and mention plot grid size
