@@ -8,7 +8,7 @@ from PIL import Image
 import math
 
 symbol_list=['BTC/USD', 'ETH/USD', 'USDT/USD', 'USDC/USD', 'BNB/USD', 'XRP/USD', 'BUSD/USD', 'ADA/USD', 'SOL/USD', 'DOGE/USD']
-timeframe_list=['1m', '5m', '15m', '30m', '1h', '1d', '1w', '1M']
+timeframe_list=['1m', '5m', '15m', '30m', '1h', '1d', '1w', '1M','1y','1Y', '5y', '5Y']
 
 image = Image.open('cripto_image.jpg')
 
@@ -40,20 +40,23 @@ from datetime import datetime
 
 now = datetime.now()
 from_ts = ftx.parse8601(now)
-limit=5000
+limit=10000
 ohlcv_list = []
 ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit=limit)
 
 df_market=pd.DataFrame(ohlcv, columns=['timestamp','open', 'high', 'low', 'close','volume'])
 df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
+df_market['typical'] = np.mean([df_market.high,df_market.low,df_market.close],axis=0)
 df_market['var_close']=df_market.close.pct_change()
 df_market['var_volume']=df_market.volume.pct_change()
+df_market['var_typical']=df_market.typical.pct_change()
 
 varianza=np.round(np.var(df_market.close),2)
 volume=np.round(df_market.volume.values[-1],2)
 close=np.round(df_market.close.values[-1],2)
 var_close=np.round(df_market.var_close.values[-2],2)
 var_volume=np.round(df_market.var_volume.values[-2],2)
+var_typical=np.round(df_market.var_typical.values[-2],2)
 
 label_price='Precio'
 label_var='Varianza'
@@ -61,7 +64,7 @@ label_volume='Volúmen'
 
 
 
-millnames = ['',' T',' M',' B',' T']
+millnames = ['',' K',' M',' B',' T']
 
 def millify(n):
     n = float(n)
