@@ -12,18 +12,17 @@ timeframe_list=['1m', '5m', '15m', '30m', '1h', '1d', '1w', '1M']
 
 image = Image.open('cripto_image.jpg')
 
-st.set_page_config(page_icon="📈", page_title="Crypto Dashboard")
+st.set_page_config(page_icon="📈", page_title="Cryptocurrency Dashboard")
 
 st.image(image,use_column_width=True)
 
 # Draw a title and some text to the app:
 '''
 # Ecosistema de criptomonedas
-
-En este dashborad se abarcará el mundo de las criptomonedas y su análisis
+Bienvenido al mundo de las criptomonedas y su análisis analizaremos el TOP 10 de la plataforma exchange de FTX
 '''
 option = st.selectbox(
-    'Elejir la cripto para conocer su historial',
+    'Elejir la cripto para conocer su historial y acceder a su calculadora criptomoneda/USD',
     (symbol_list))
 
 'Se eligio:', option
