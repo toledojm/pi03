@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 import streamlit as st
 from plotly.subplots import make_subplots
 from PIL import Image
+import math
 
 symbol_list=['BTC/USD', 'ETH/USD', 'USDT/USD', 'USDC/USD', 'BNB/USD', 'XRP/USD', 'BUSD/USD', 'ADA/USD', 'SOL/USD', 'DOGE/USD']
 timeframe_list=['1m', '5m', '15m', '30m', '1h', '1d', '1w', '1M']
@@ -62,10 +63,21 @@ label_price='Precio'
 label_var='Varianza'
 label_volume='Volúmen'
 
+
+
+millnames = ['',' T',' M',' B',' T']
+
+def millify(n):
+    n = float(n)
+    millidx = max(0,min(len(millnames)-1,
+                        int(math.floor(0 if n == 0 else math.log10(abs(n))/3))))
+
+    return '{:.0f}{}'.format(n / 10**(3 * millidx), millnames[millidx])
+
 col1, col2, col3 = st.columns(3)
 col1.metric(label_price, close,var_close)
-col2.metric(label_volume, volume,var_volume)
-col3.metric(label_var, varianza)
+col2.metric(label_volume, millify(volume),var_volume)
+col3.metric(label_var, millify(varianza))
 
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
