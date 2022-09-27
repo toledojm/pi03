@@ -54,7 +54,7 @@ st.metric(option, VWAP_var)
 
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
-               vertical_spacing=0.3, subplot_titles=('OHLC', 'Volume'), 
+               vertical_spacing=0.3, subplot_titles=('OHLC', 'Volume'), showlegend=False,
                row_width=[0.4 ,0.8])
 
 # Plot OHLC on 1st row
