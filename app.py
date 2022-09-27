@@ -122,11 +122,12 @@ with tab1:
         'El valor de USD en la criptomoneda es:',conversion_usd
 with tab2:
     st.plotly_chart(fig)#use_container_width=True
-with tab3:
-    st.dataframe(df_market)
     expander = st.expander("See explanation")
     expander.write("""
         The chart above shows some numbers I picked for you.
         I rolled actual dice for these, so they're *guaranteed* to
         be random.
     """)
+with tab3:
+    st.dataframe(df_market.style.highlight_max(['var_close','var_volume','var_typical']))
+    
