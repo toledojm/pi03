@@ -40,7 +40,7 @@ timeframe=genre
 
 from datetime import datetime
 
-# datetime object containing current date and time
+
 now = datetime.now()
 from_ts = ftx.parse8601(now)
 limit=1000
@@ -49,33 +49,28 @@ ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit
 ohlcv_list.append(ohlcv)
 while(len(ohlcv)==1000):
     from_ts = ohlcv[-1][0]
-    new_ohlcv = ftx.fetch_ohlcv('BTC/USDT', '1m', limit=1000)
+    new_ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit=limit)
     ohlcv.extend(new_ohlcv)
-bars=ftx.fetch_ohlcv(symbol,timeframe=timeframe,limit=limit) #fetches historical candlestick data containing the open, high, low, and close price, and the volume of a market
-df_market=pd.DataFrame(bars, columns=['timestamp','open', 'high', 'low', 'close','volume'])
+df_market=pd.DataFrame(ohlcv, columns=['timestamp','open', 'high', 'low', 'close','volume'])
 df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
+df_market['typical'] = np.mean([df_market.high,df_market.low,df_market.close],axis=0)
+df_market['vwap']=sum(df_market.typical*df_market.volume)/sum(df_market.volume)
+df_market['var']=df_market.close.pct_change()
 
-df_market['typical'] = np.mean([df_market.high,df_market.low,df_market.close],axis=0) # Typical Price = High price + Low price + Closing Price/3
-#VWAP = Cumulative (Typical Price x Volume)/Cumulative Volume
-#Cumulative = total since the trading session opened
-
-df_market['VWAP']=sum(df_market.typical*df_market.volume)/sum(df_market.volume)
-
-vwap=np.round(df_market.VWAP.values[-1],2)
+vwap=np.round(df_market.vwap.values[-1],2)
 typical=np.round(df_market.typical.values[-1],4)
 close=np.round(df_market.close.values[-1],4)
-media=np.median(df_market.close)
-n=len(df_market)
+var=np.round(df_market.var.values[-1],4)
 
 var=np.var(df_market.close)
-label_price=str(symbol+' price')
+label_price=str(symbol+' Precio')
 label_var='Varianza'
 label_vwap='Precio Medio Ponderado \n por Volumen (VWAP)'
 
 
 
 col1, col2, col3 = st.columns(3)
-col1.metric(label_price, close)
+col1.metric(label_price, close,var)
 col2.metric(label_var, typical)
 col3.metric(label_vwap, vwap)
 
