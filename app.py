@@ -58,7 +58,7 @@ fig = make_subplots(rows=2, cols=1, shared_xaxes=True,
                row_width=[0.8, 2.8])
 
 # Plot OHLC on 1st row
-fig.add_trace(go.Candlestick(x=df_market.timestamp,
+fig.add_trace(go.Candlestick(x=df_market['timestamp'],
                     open=df_market.open,
                     high=df_market.high,
                     low=df_market.low,
