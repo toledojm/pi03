@@ -46,11 +46,7 @@ from_ts = ftx.parse8601(now)
 limit=5000
 ohlcv_list = []
 ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit=limit)
-ohlcv_list.append(ohlcv)
-while(len(ohlcv)==limit):
-    from_ts = ohlcv[-1][0]
-    new_ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit=limit)
-    ohlcv.extend(new_ohlcv)
+
 df_market=pd.DataFrame(ohlcv, columns=['timestamp','open', 'high', 'low', 'close','volume'])
 df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
 df_market['var_close']=df_market.close.pct_change()
@@ -60,7 +56,7 @@ varianza=np.var(df_market.close)
 volume=np.round(df_market.volume.values[-1],2)
 close=np.round(df_market.close.values[-1],2)
 var_close=np.round(df_market.var_close.values[-2],2)
-var_volume=np.round(df_market.var_close.values[-2],2)
+var_volume=np.round(df_market.var_volume.values[-2],2)
 
 label_price='Precio'
 label_var='Varianza'
