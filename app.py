@@ -129,5 +129,5 @@ with tab2:
         be random.
     """)
 with tab3:
-    st.dataframe(df_market.style.highlight_max(['var_close','var_volume','var_typical']))
+    st.dataframe(df_market.round({'open':2, 'high':2, 'low':2, 'close':2,'volume':2,'typical':2,'var_close':4,'var_volume':4,'var_typical':4}))
     
