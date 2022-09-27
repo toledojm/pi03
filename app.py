@@ -63,7 +63,7 @@ ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit
 df_market=pd.DataFrame(ohlcv, columns=['timestamp','open', 'high', 'low', 'close','volume'])
 df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
 df_market['typical'] = np.mean([df_market.high,df_market.low,df_market.close],axis=0)
-df_market['var_close']=df_market.close.pct_change()
+df_market['var_close']=df_market.close.pct_change()*100
 df_market['var_volume']=df_market.volume.pct_change()*100
 df_market['var_typical']=df_market.typical.pct_change()*100
 
