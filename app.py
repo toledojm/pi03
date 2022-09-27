@@ -61,9 +61,11 @@ df_market['typical'] = np.mean([df_market.high,df_market.low,df_market.close],ax
 
 df_market['VWAP']=sum(df_market.typical*df_market.volume)/sum(df_market.volume)
 
-VWAP=np.round(df_market.VWAP.values[-1],4)
+vwap=np.round(df_market.VWAP.values[-1],4)
+typical=np.round(df_market.typical.values[-1],4)
 
-st.metric(option, VWAP)
+st.metric(option, vwap)
+st.metric(option, typical)
 
 
 # Create subplots and mention plot grid size
