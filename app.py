@@ -92,10 +92,10 @@ def millify(n):
     return '{:.0f}{}'.format(n / 10**(3 * millidx), millnames[millidx])
 
 col1, col2, col3, col4= st.columns(4)
-col1.metric(label_price, close,"%.2f" %var_close)
-col2.metric(label_volume, millify(volume),var_volume)
+col1.metric(label_price, close,var_close"%.2f" %)
+col2.metric(label_volume, millify(volume),var_volume"%.2f" %)
 col3.metric(label_var, millify(varianza))
-col4.metric(label_typical, typical,var_typical)
+col4.metric(label_typical, typical,var_typical"%.2f" %)
 '------------------------------------------------------------------------------------------'
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
