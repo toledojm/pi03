@@ -12,7 +12,7 @@ timeframe_list=['1m', '5m', '15m', '1h', '1d', '1w', '1M']
 
 image = Image.open('cripto_image.jpg')
 
-st.set_page_config(page_icon="📈", page_title="Cryptocurrency Dashboard")
+st.set_page_config(page_icon="📈", page_title="Ecosistema de criptomonedas")
 
 st.image(image,use_column_width=True)
 
@@ -24,13 +24,13 @@ st.image(image,use_column_width=True)
 col1, col2 = st.columns(2)
 with col1:
     option = st.selectbox(
-        'Seleccionar de la lista desplegable la criptomoneda a analizar',
+        'Seleccionar la criptomoneda a analizar',
         (symbol_list))
 with col2:
     'La selección fue:', option
 
 genre = st.radio(
-    "elija el intervalo de tiempo para graficar el historial",
+    "Seleccionar el intervalo de tiempo",
     timeframe_list, horizontal=True)
 
 ftx= ccxt.ftx() # utilizo phemex Exchange Markets
