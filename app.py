@@ -75,40 +75,38 @@ col1.metric(label_price, close,var_close)
 col2.metric(label_volume, millify(volume),var_volume)
 col3.metric(label_var, millify(varianza))
 
-col1, col2= st.columns(2)
-with col1:
-    'calculadora criptomoneda->USD'
-    cripto = st.number_input('Insertar el valor en criptomoneda')
-    conversion_cripto=cripto*close
-    st.write('El valor de la critomoneda en USD es:  ', conversion_cripto)
-with col2:
-    'calculadora USD->criptomoneda'
-    usd = st.number_input('Insertar el valor en moneda USD')
-    conversion_usd=usd/close
-    st.write('El valor en USD en la criptomoneda: ', conversion_usd)
-
-
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
                vertical_spacing=0.3, subplot_titles=('OHLC', 'Volume'),
                row_width=[0.4 ,0.8])
-
 # Plot OHLC on 1st row
-
-
 fig.add_trace(go.Ohlc(x=df_market['timestamp'],
                     open=df_market.open,
                     high=df_market.high,
                     low=df_market.low,
                     close=df_market.close,name="OHLC", showlegend=False), row=1, col=1)
-
-
 # Bar trace for volumes on 2nd row without legend
 fig.add_trace(go.Bar(x=df_market.timestamp,y=df_market.volume,showlegend=False), row=2, col=1)
-
 # Do not show OHLC's rangeslider plot 
 fig.update(layout_xaxis_rangeslider_visible=True)
 
-fig.update_layout(height=900, width=900)
 
-st.plotly_chart(fig, use_container_width=True)
+tab1, tab2, tab3 = st.tabs(["Historial", "Calculadora", "Tabla"])
+
+with tab1:
+    col1, col2= st.columns(2)
+    with col1:
+        'calculadora criptomoneda->USD'
+        cripto = st.number_input('Insertar el valor en criptomoneda')
+        conversion_cripto=cripto*close
+        st.write('El valor de la critomoneda en USD es:  ', conversion_cripto)
+    with col2:
+        'calculadora USD->criptomoneda'
+        usd = st.number_input('Insertar el valor en moneda USD')
+        conversion_usd=usd/close
+        st.write('El valor en USD en la criptomoneda: ', conversion_usd)
+
+with tab2:
+    st.plotly_chart(fig, use_container_width=True)
+with tab3:
+    st.dataframe(df_market)
