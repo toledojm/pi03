@@ -13,7 +13,7 @@ image = Image.open('cripto_image.jpg')
 
 st.set_page_config(page_icon="📈", page_title="Crypto Dashboard")
 
-st.image(image, caption='cryptocurrency-coins')
+st.image(image,use_column_width='auto')
 
 # Draw a title and some text to the app:
 '''
@@ -88,4 +88,4 @@ fig.update(layout_xaxis_rangeslider_visible=True)
 
 fig.update_layout(height=700, width=900)
 
-st.plotly_chart(fig)
+st.plotly_chart(fig,use_container_width=True)
