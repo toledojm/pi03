@@ -22,7 +22,7 @@ st.image(image,use_column_width=True)
 Bienvenido al mundo de las criptomonedas y su análisis analizaremos el TOP 10 de la plataforma exchange de FTX
 '''
 option = st.selectbox(
-    'Elejir la cripto para conocer su historial y acceder a su calculadora criptomoneda/USD',
+    'Elejir la cripto para conocer su historial y acceder a su calculadora criptomoneda/USD y viceversa',
     (symbol_list))
 
 'Se eligio:', option
