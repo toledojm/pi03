@@ -60,7 +60,7 @@ df_market['typical'] = np.round(np.mean([df_market.high,df_market.low,df_market.
 #Cumulative = total since the trading session opened
 df_market['VWAP']=np.round(sum(df_market.typical*df_market.volume)/sum(df_market.volume))
 
-VWAP=df_market.VWAP
+VWAP=df_market.VWAP.values[-1]
 
 st.metric(option, VWAP)
 
