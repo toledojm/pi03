@@ -28,6 +28,12 @@ with col1:
         (symbol_list))
 with col2:
     'La selección fue:', option
+expander = st.expander("See explanation")
+expander.write("""
+        The chart above shows some numbers I picked for you.
+        I rolled actual dice for these, so they're *guaranteed* to
+        be random.
+    """)
 '------------------------------------------------------------------------------------------'
 genre = st.radio(
     "Seleccionar el intervalo de tiempo",
@@ -118,3 +124,9 @@ with tab2:
     st.plotly_chart(fig)#use_container_width=True
 with tab3:
     st.dataframe(df_market)
+    expander = st.expander("See explanation")
+    expander.write("""
+        The chart above shows some numbers I picked for you.
+        I rolled actual dice for these, so they're *guaranteed* to
+        be random.
+    """)
