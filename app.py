@@ -108,8 +108,8 @@ fig.add_trace(go.Ohlc(x=df_market['timestamp'],
 # Bar trace for volumes on 2nd row without legend
 fig.add_trace(go.Bar(x=df_market.timestamp,y=df_market.volume,showlegend=False), row=2, col=1)
 # Do not show OHLC's rangeslider plot 
-fig.update(layout_xaxis_rangeslider_visible=True,width=800,height=900)
-
+fig.update(layout_xaxis_rangeslider_visible=True)
+fig.update_layout(autosize=False,width=800,height=900)
 
 
 
