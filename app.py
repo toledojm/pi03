@@ -37,7 +37,7 @@ genre = st.radio(
 ftx= ccxt.ftx() # utilizo phemex Exchange Markets
 symbol=option # simbolo de la moneda
 timeframe=genre
-limit=500
+limit=600
 bars=ftx.fetch_ohlcv(symbol,timeframe=timeframe,limit=limit) #fetches historical candlestick data containing the open, high, low, and close price, and the volume of a market
 df_market=pd.DataFrame(bars, columns=['timestamp','open', 'high', 'low', 'close','volume'])
 df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
