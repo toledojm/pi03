@@ -55,7 +55,7 @@ st.metric(option, VWAP_var)
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=3, cols=1, shared_xaxes=True, 
                vertical_spacing=0.2, subplot_titles=('Candlestick','OHLC', 'Volume'), 
-               row_width=[0.8,0.8 ,2.8])
+               row_width=[3.8,3.8 ,2.8])
 
 # Plot OHLC on 1st row
 fig.add_trace(go.Candlestick(x=df_market['timestamp'],
