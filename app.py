@@ -77,15 +77,16 @@ col2.metric(label_volume, millify(volume),var_volume)
 col3.metric(label_var, millify(varianza))
 
 col1, col2= st.columns(2)
-'calculadora criptomoneda->USD'
-cripto = st.number_input('Insertar el valor en moneda cripto')
-conversion_cripto=cripto*close
-col1.write('The current number is ', conversion_cripto)
-
-'calculadora USD->criptomoneda'
-usd = st.number_input('Insertar el valor en moneda USD')
-conversion_usd=usd/close
-col2.write('The current number is ', conversion_usd)
+with col1:
+    'calculadora criptomoneda->USD'
+    cripto = st.number_input('Insertar el valor en moneda cripto')
+    conversion_cripto=cripto*close
+    st.write('The current number is ', conversion_cripto)
+with col2:
+    'calculadora USD->criptomoneda'
+    usd = st.number_input('Insertar el valor en moneda USD')
+    conversion_usd=usd/close
+    st.write('The current number is ', conversion_usd)
 
 
 # Create subplots and mention plot grid size
