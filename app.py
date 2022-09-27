@@ -102,12 +102,12 @@ with tab1:
         'calculadora criptomoneda->USD'
         cripto = st.number_input('Insertar el valor en criptomoneda')
         conversion_cripto=cripto*close
-        st.write('El valor de la critomoneda en USD es:  ', conversion_cripto)
+        'El valor de la critomoneda en USD es:  ', conversion_cripto
     with col2:
         'calculadora USD->criptomoneda'
         usd = st.number_input('Insertar el valor en moneda USD')
         conversion_usd=usd/close
-        st.write('El valor en USD en la criptomoneda: ', conversion_usd)
+        'El valor en USD en la criptomoneda: ', conversion_usd
 with tab2:
     st.plotly_chart(fig, use_container_width=True)
 with tab3:
