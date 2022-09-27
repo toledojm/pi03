@@ -19,12 +19,12 @@ st.image(image,use_column_width=True)
 # Draw a title and some text to the app:
 
 '''# Ecosistema de criptomonedas'''
-'_Este dashboard se analizarán 10 criptomonedas de la plataforma de exchange FTX_'
+'_Este dashboard analizará 10 criptomonedas de la plataforma de exchange FTX_'
 '------------------------------------------------------------------------------------------'
 col1, col2 = st.columns(2)
 with col1:
     option = st.selectbox(
-        'Seleccionar de la lista desplegable la criptomoneda a analizar:',
+        'Seleccionar de la lista desplegable la criptomoneda a analizar',
         (symbol_list))
 with col2:
     'La selección fue:', option
@@ -56,6 +56,7 @@ df_market['var_typical']=df_market.typical.pct_change()
 varianza=np.round(np.var(df_market.close),2)
 volume=np.round(df_market.volume.values[-1],2)
 close=np.round(df_market.close.values[-1],2)
+typical=np.round(df_market.tyical.values[-1],2)
 var_close=np.round(df_market.var_close.values[-2],2)
 var_volume=np.round(df_market.var_volume.values[-2],2)
 var_typical=np.round(df_market.var_typical.values[-2],2)
@@ -63,6 +64,7 @@ var_typical=np.round(df_market.var_typical.values[-2],2)
 label_price='Precio'
 label_var='Varianza'
 label_volume='Volúmen'
+label_typical='Media Móvil'
 
 
 
@@ -75,10 +77,11 @@ def millify(n):
 
     return '{:.0f}{}'.format(n / 10**(3 * millidx), millnames[millidx])
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4= st.columns(4)
 col1.metric(label_price, close,var_close)
 col2.metric(label_volume, millify(volume),var_volume)
 col3.metric(label_var, millify(varianza))
+col4.metric(label_typical, typical, var_typical)
 
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
