@@ -70,7 +70,7 @@ n=len(df_market)
 var=np.var(df_market.close)
 label_price=str(symbol+' price')
 label_var='Varianza'
-label_vwap='Precio Medio Ponderado por Volumen (VWAP)'
+label_vwap='Precio Medio Ponderado \n por Volumen (VWAP)'
 
 
 
