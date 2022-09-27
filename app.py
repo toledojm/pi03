@@ -22,12 +22,13 @@ st.image(image,use_column_width=True)
 
 'Este dashboard se analizarán 10 criptomonedas de la plataforma de exchange FTX'
 '------------------------------------------------------------------------------------------'
-
-option = st.selectbox(
-    'Elejir la cripto para conocer su historial y acceder a su calculadora criptomoneda/USD y viceversa',
-    (symbol_list))
-
-'Se eligio:', option
+col1, col2 = st.columns(2)
+with col1:
+    option = st.selectbox(
+        'Elejir la cripto para conocer su historial y acceder a su calculadora criptomoneda/USD y viceversa',
+        (symbol_list))
+with col2:
+    'Se eligio:', option
 
 genre = st.radio(
     "elija el intervalo de tiempo para graficar el historial",
