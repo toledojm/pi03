@@ -56,9 +56,9 @@ df_market=pd.DataFrame(bars, columns=['timestamp','open', 'high', 'low', 'close'
 df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
 
 df_market['typical'] = np.round(np.mean([df_market.high,df_market.low,df_market.close],axis=0)) # Typical Price = High price + Low price + Closing Price/3
-#VWAP = Cumulative Typical Price x Volume/Cumulative Volume
+#VWAP = Cumulative (Typical Price x Volume)/Cumulative Volume
 #Cumulative = total since the trading session opened
-df_market['VWAP']=np.round(sum(df_market.typical)*df_market.volume/sum(df_market.volume))
+df_market['VWAP']=np.round(sum(df_market.typical*df_market.volume)/sum(df_market.volume))
 
 VWAP_var=np.var(df_market.VWAP)
 
