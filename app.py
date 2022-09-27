@@ -73,10 +73,10 @@ var_close=np.round(df_market.var_close.values[-2],6)
 var_volume=np.round(df_market.var_volume.values[-2],6)
 var_typical=np.round(df_market.var_typical.values[-2],6)
 
-label_price='Precio'
-label_var='Varianza'
-label_volume='Volúmen'
-label_typical='Media Móvil'
+label_price='Precio ＄'
+label_var='Varianza 📈'
+label_volume='Volúmen＄'
+label_typical='Media Móvil📈'
 
 
 
@@ -127,7 +127,7 @@ with tab1:
         conversion_usd=usd/close
         'El valor de USD en la criptomoneda es:',conversion_usd
 with tab2:
-    st.plotly_chart(fig)#use_container_width=True
+    st.plotly_chart(fig,use_container_width=True)
     expander = st.expander("See explanation")
     expander.write("""
         The chart above shows some numbers I picked for you.
