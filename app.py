@@ -7,7 +7,7 @@ from plotly.subplots import make_subplots
 from PIL import Image
 import math
 
-symbol_list=['BTC/USD', 'ETH/USD', 'USDT/USD', 'USDC/USD', 'BNB/USD', 'XRP/USD', 'BUSD/USD', 'ADA/USD', 'SOL/USD', 'DOGE/USD']
+symbol_list=['BTC/USD', 'ETH/USD', 'BNB/USD', 'XRP/USD', 'ADA/USD', 'SOL/USD', 'DOGE/USD']
 timeframe_list=['1m', '5m', '15m', '1h', '1d', '1w', '1M']
 BTC='Bitcoin es una criptomoneda descentralizada presentada originalmente en un documento técnico en 2008 por una persona, o grupo de personas, utilizando el alias Satoshi Nakamoto. Se lanzó poco después, en enero de 2009.El bitcoin es una moneda en línea peer-to-peer, lo que significa que todas las transacciones ocurren directamente entre los participantes, iguales e independientes, de la red sin la necesidad de que ningún intermediario les de permiso o les facilite las operaciones. Bitcoin se creó, de acuerdo con las propias palabras de Nakamoto, para permitir que “los pagos en línea se pudieran enviar directamente de una parte a otra sin pasar por una institución financiera.Existen algunos conceptos que describen un tipo similar de moneda electrónica descentralizada antes del BTC, pero Bitcoin tiene la distinción de ser la primera criptomoneda en entrar en uso.'
 #BTC='Moneda digital pionera. En 2008 fue creada por varias personas bajo el nombre de Satoshi Nakamoto. Por supuesto, en su lanzamiento no tenía el valor que posee ahora y la mayoría tampoco podía llegar a pensar que alcanzaría estos datos.Sin duda esta moneda se ha posicionado como líder en el mercado digital. Sin embargo, ha sufrido grandes altibajos y resulta complicado saber cuándo va a subir o a bajar. Pese a que muchos gestores consideran que el Bitcoin es el nuevo oro digital, sigue teniendo grandes variaciones de precio y volatilidades muy elevadas.El funcionamiento de la red Bitcoin es relativamente simple (de ahí gran parte de su virtud) pero asombrosamente segura.'
@@ -116,11 +116,15 @@ fig.add_trace(go.Bar(x=df_market.timestamp,y=df_market.volume,showlegend=False),
 fig.update(layout_xaxis_rangeslider_visible=True)
 fig.update_layout(autosize=False,width=800,height=700)
 
+tickers = pd.DataFrame(ftx.fetch_tickers(symbols=['BTC/USD', 'ETH/USD', 'BNB/USD', 'XRP/USD', 'SOL/USD', 'DOGE/USD'])).T
+tickers.drop(['symbol','timestamp','datetime','high','low','bidVolume','askVolume','vwap','open','last','previousClose','change','average','baseVolume','info'],axis=1,inplace=True)
 
 
-tab1, tab2, tab3 = st.tabs(["Calculadora","Gráfico Histórico", "Tabla Histórica"])
+tab1, tab2, tab3 , tab4= st.tabs(["Criptomonedas","Calculadora","Gráfico Histórico", "Tabla Histórica"])
 
 with tab1:
+    st.dataframe(tickers)
+with tab2:
     col1, col2= st.columns(2)
     with col1:
         'calculadora de criptomoneda a -> USD'
@@ -132,7 +136,7 @@ with tab1:
         usd = st.number_input('Insertar el valor en moneda USD')
         conversion_usd=usd/close
         'El valor de USD en la criptomoneda es:',conversion_usd
-with tab2:
+with tab3:
     st.plotly_chart(fig,use_container_width=True)
     expander = st.expander("See explanation")
     expander.write("""
@@ -140,6 +144,6 @@ with tab2:
         I rolled actual dice for these, so they're *guaranteed* to
         be random.
     """)
-with tab3:
+with tab4:
     st.dataframe(df_market)
     
