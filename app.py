@@ -123,7 +123,7 @@ tickers.drop(['symbol','timestamp','datetime','high','low','bidVolume','askVolum
 tab1, tab2, tab3 , tab4= st.tabs(["Criptomonedas","Calculadora","Gráfico Histórico", "Tabla Histórica"])
 
 with tab1:
-    st.dataframe(tickers)
+    st.dataframe(tickers,use_container_width=True)
 with tab2:
     col1, col2= st.columns(2)
     with col1:
