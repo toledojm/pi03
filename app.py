@@ -52,7 +52,7 @@ ftx_ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, l
 
 ohlcv=pd.DataFrame(ftx_ohlcv, columns=['date','open', 'high', 'low', 'close','volume'])
 ohlcv['date']=pd.to_datetime(ohlcv['date'],unit='ms')
-ohlcv['typical'] = np.mean([ohlcv.high,ohlcv.low,ohlcv.close],axis=0)
+ohlcv['media'] = np.mean([ohlcv.high,ohlcv.low],axis=0)
 
 
 # se crea la tabla de criptomoedas con el TOP 10 por volumen del exchange FTX
@@ -72,7 +72,7 @@ tickers=tickers[cols]
 varianza=np.round(np.var(ohlcv.close),2)
 volume=np.round(tickers.quoteVolume.loc[option],2)
 close=np.round(tickers.close.loc[option],2)
-typical=np.round(ohlcv.typical.values[-1],2)
+media=np.round(ohlcv.media.values[-1],2)
 var_close=np.round(tickers.percentage.loc[option],2)/100
 
 delta_close="{:.2%}".format(var_close) +' var 24hs'
@@ -92,13 +92,13 @@ def millify(n):
 label_price='Precio u$s'
 label_var='Varianza u$s'
 label_volume='Volúmen u$s'
-label_typical='Media Móvil u$s'
+label_media='Media Móvil u$s'
 
 col1, col2, col3, col4= st.columns(4)
 col1.metric(label_price, close,delta_close)
 col2.metric(label_volume, millify(volume))
 col3.metric(label_var, millify(varianza))
-col4.metric(label_typical, typical) 
+col4.metric(label_media, media) 
 '------------------------------------------------------------------------------------------'
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
@@ -110,7 +110,7 @@ fig.add_trace(go.Candlestick(x=ohlcv.date,
                     high=ohlcv.high,
                     low=ohlcv.low,
                     close=ohlcv.close, showlegend=False), row=1, col=1)
-fig.add_trace(go.Scatter(x=ohlcv.date, y=ohlcv.typical,mode='lines',marker_color='#A9A9A9'),row=1, col=1)
+fig.add_trace(go.Scatter(x=ohlcv.date, y=ohlcv.typical,mode='lines',marker_color='#A9A9A9',line=0.01,showlegend=False),row=1, col=1)
 # Bar trace for volumes on 2nd row without legend
 fig.add_trace(go.Bar(x=ohlcv.date,y=ohlcv.volume,showlegend=False,marker_color='#ff0000'), row=2, col=1)
 # Do not show OHLC's rangeslider plot 
