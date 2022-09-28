@@ -145,5 +145,5 @@ with tab3:
         be random.
     """)
 with tab4:
-    st.dataframe(df_market)
+    st.dataframe(df_market,use_container_width=True)
     
