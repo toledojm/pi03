@@ -9,8 +9,6 @@ from PIL import Image
 import math
 
 
-symbol_list=['BTC/USD','ETH/USD','XRP/USD','SOL/USD','USDT/USD','ETHW/USD','BNB/USD','LINK/USD','FTT/USD','ATOM/USD']
-code_list=['BTC', 'ETH','XRP','SOL','USDT','ETHW', 'BNB', 'LINK','FTT', 'ATOM']
 
 timeframe_list=['1m', '5m', '15m', '1h', '1d', '1w', '1M']
 BTC='Bitcoin es una criptomoneda descentralizada presentada originalmente en un documento técnico en 2008 por una persona, o grupo de personas, utilizando el alias Satoshi Nakamoto. Se lanzó poco después, en enero de 2009.El bitcoin es una moneda en línea peer-to-peer, lo que significa que todas las transacciones ocurren directamente entre los participantes, iguales e independientes, de la red sin la necesidad de que ningún intermediario les de permiso o les facilite las operaciones. Bitcoin se creó, de acuerdo con las propias palabras de Nakamoto, para permitir que “los pagos en línea se pudieran enviar directamente de una parte a otra sin pasar por una institución financiera.Existen algunos conceptos que describen un tipo similar de moneda electrónica descentralizada antes del BTC, pero Bitcoin tiene la distinción de ser la primera criptomoneda en entrar en uso.'
@@ -23,10 +21,11 @@ XRP= 'XRP es la criptomoneda nativa de Ripple, un sistema de pago de criptomoned
 SOL='Solana es un proyecto de código abierto altamente funcional que se basa en la naturaleza sin permiso de la tecnología blockchain para proporcionar soluciones financieras descentralizadas (DeFi). Si bien la idea y el trabajo inicial en el proyecto comenzaron en 2017, Solana fue lanzada oficialmente en marzo de 2020 por la Fundación Solana con sede en Ginebra, Suiza.El protocolo Solana está diseñado para facilitar la creación de aplicaciones descentralizadas (DApp). Su objetivo es mejorar la escalabilidad introduciendo un consenso de prueba de historia (PoH) combinado con el consenso de prueba de participación (PoS) subyacente de la cadena de bloques.Debido al innovador modelo de consenso híbrido, Solana disfruta del interés tanto de los pequeños comerciantes como de los comerciantes institucionales. Un enfoque importante para la Fundación Solana es hacer que las finanzas descentralizadas sean accesibles a mayor escala.'
 DOGE='Dogecoin (DOGE) se basa en el popular meme de Internet "doge" y tiene un Shiba Inu en su logotipo. La moneda digital de código abierto fue creada por Billy Markus de Portland, Oregon y Jackson Palmer de Sydney, Australia, y se bifurcó de Litecoin en diciembre de 2013. Los creadores de Dogecoin la vieron como una criptomoneda divertida y alegre que tendría un mayor atractivo más allá de la audiencia principal de Bitcoin, ya que se basó en un meme de perro. El CEO de Tesla, Elon Musk, publicó varios tuits en las redes sociales en los que decía que Dogecoin era su moneda favorita.'
 
-
-dic={'BTC/USD':BTC,'ETH/USD':ETH,'ADA/USD':ADA,'USDT/USD':USDT,'BNB/USD':BNB,'XRP/USD':XRP,'SOL/USD':SOL,'DOGE/USD':DOGE}
-
-
+symbol_list=['BTC/USD','ETH/USD','XRP/USD','SOL/USD','USDT/USD','ETHW/USD','BNB/USD','LINK/USD','FTT/USD','ATOM/USD']
+dic_symbol={'BTC':'BTC/USD','ETH':'ETH/USD','XRP':'XRP/USD','SOL':'SOL/USD','USDT':'USDT/USD','ETHW':'ETHW/USD','BNB':'BNB/USD','LINK':'LINK/USD','FTT';'FTT/USD','ATOM';'ATOM/USD'}
+code_list=['BTC', 'ETH','XRP','SOL','USDT','ETHW', 'BNB', 'LINK','FTT', 'ATOM']
+dic_descripcion={'BTC/USD':BTC,'ETH/USD':ETH,'ADA/USD':ADA,'USDT/USD':USDT,'BNB/USD':BNB,'XRP/USD':XRP,'SOL/USD':SOL,'DOGE/USD':DOGE}
+dic_name={'ATOM':'Atom','BNB':'Binance Coin','BTC':'Bitcoin','ETH':'Ethereum','ETHW':'Ethereum','FTT':'FTX Token','LINK':'ChainLink Token','SOL':'Solana','XRP':'XRP'}
 image = Image.open('cripto_image.jpg')
 
 st.set_page_config(page_icon="📈", page_title="Ecosistema de criptomonedas",layout = 'wide')
@@ -40,12 +39,12 @@ st.image(image,use_column_width=True)
 '---------------------------------------------------------------------------------------------'
 option = st.selectbox(
         'Seleccionar la criptomoneda a analizar',
-        (symbol_list))
+        (code_list))
 
-'La selección fue:', option
+'La selección fue:', dic_name[option]
 
 expander = st.expander("información detallada de la criptomoneda seleccionada")
-expander.write(dic[option])
+expander.write(dic_descripcion[option])
 
 genre = st.radio(
     "Seleccionar el intervalo de tiempo",
@@ -54,7 +53,7 @@ genre = st.radio(
 
 
 ftx= ccxt.ftx() # se instancia el exchange de FTX
-symbol=option # simbolo de la criptomoneda seleccionada por usuario
+symbol=dic_symbol[option] # simbolo de la criptomoneda seleccionada por usuario
 timeframe=genre # intervalo de tiempo seleccionado por usuario
 
 now = datetime.now() 
@@ -84,10 +83,10 @@ tickers=tickers[cols]
 # se buscan los datos para armar los principales KPI's
 
 varianza=np.round(np.var(ohlcv.close),2)
-volume=np.round(tickers[dic[option]].quoteVolume,2)
-close=np.round(tickers[dic[option]].close,2)
+volume=np.round(tickers[option].quoteVolume,2)
+close=np.round(tickers[option].close,2)
 typical=np.round(ohlcv.typical.values[-1],2)
-var_close=np.round(tickers[dic[option]].percentage,2)
+var_close=np.round(tickers[option].percentage,2)
 
 
 label_price='Precio $'
