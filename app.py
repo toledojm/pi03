@@ -22,7 +22,7 @@ SOL='Solana es un proyecto de código abierto altamente funcional que se basa en
 DOGE='Dogecoin (DOGE) se basa en el popular meme de Internet "doge" y tiene un Shiba Inu en su logotipo. La moneda digital de código abierto fue creada por Billy Markus de Portland, Oregon y Jackson Palmer de Sydney, Australia, y se bifurcó de Litecoin en diciembre de 2013. Los creadores de Dogecoin la vieron como una criptomoneda divertida y alegre que tendría un mayor atractivo más allá de la audiencia principal de Bitcoin, ya que se basó en un meme de perro. El CEO de Tesla, Elon Musk, publicó varios tuits en las redes sociales en los que decía que Dogecoin era su moneda favorita.'
 
 symbol_list=['BTC/USD','ETH/USD','XRP/USD','SOL/USD','USDT/USD','ETHW/USD','BNB/USD','LINK/USD','FTT/USD','ATOM/USD']
-dic_symbol={'BTC':'BTC/USD','ETH':'ETH/USD','XRP':'XRP/USD','SOL':'SOL/USD','USDT':'USDT/USD','ETHW':'ETHW/USD','BNB':'BNB/USD','LINK':'LINK/USD','FTT';'FTT/USD','ATOM';'ATOM/USD'}
+dic_symbol={'BTC':'BTC/USD','ETH':'ETH/USD','XRP':'XRP/USD','SOL':'SOL/USD','USDT':'USDT/USD','ETHW':'ETHW/USD','BNB':'BNB/USD','LINK':'LINK/USD','FTT':'FTT/USD','ATOM':'ATOM/USD'}
 code_list=['BTC', 'ETH','XRP','SOL','USDT','ETHW', 'BNB', 'LINK','FTT', 'ATOM']
 dic_descripcion={'BTC/USD':BTC,'ETH/USD':ETH,'ADA/USD':ADA,'USDT/USD':USDT,'BNB/USD':BNB,'XRP/USD':XRP,'SOL/USD':SOL,'DOGE/USD':DOGE}
 dic_name={'ATOM':'Atom','BNB':'Binance Coin','BTC':'Bitcoin','ETH':'Ethereum','ETHW':'Ethereum','FTT':'FTX Token','LINK':'ChainLink Token','SOL':'Solana','XRP':'XRP'}
