@@ -102,7 +102,7 @@ col4.metric(label_typical, typical,delta_typical)
 '------------------------------------------------------------------------------------------'
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
-               vertical_spacing=0.3, subplot_titles=('OHLC', 'Volume'),
+               vertical_spacing=0.2, subplot_titles=('OHLC', 'Volume'),
                row_width=[0.4 ,0.8])
 # Plot OHLC on 1st row
 fig.add_trace(go.Candlestick(x=df_market['timestamp'],
