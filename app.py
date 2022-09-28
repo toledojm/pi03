@@ -86,7 +86,7 @@ varianza=np.round(np.var(ohlcv.close),2)
 volume=np.round(tickers.quoteVolume.loc[option],2)
 close=np.round(tickers.close.loc[option],2)
 typical=np.round(ohlcv.typical.values[-1],2)
-var_close=np.round(tickers.percentage.loc[option],2)
+var_close=np.round(tickers.percentage.loc[option],2)/100
 
 
 label_price='Precio $'
@@ -94,7 +94,7 @@ label_var='Varianza 📈'
 label_volume='Volúmen $'
 label_typical='Media Móvil 📈'
 
-delta_close="{:.2%}".format(var_close)/100
+delta_close="{:.2%}".format(var_close)
 
 
 
