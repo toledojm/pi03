@@ -63,8 +63,8 @@ ftx_ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, l
 
 # se crea la tabla para graficar el historial ohlcv
 
-ohlcv=pd.DataFrame(ftx_ohlcv, columns=['timestamp','open', 'high', 'low', 'close','volume'])
-ohlcv['timestamp']=pd.to_datetime(ohlcv['timestamp'],unit='ms')
+ohlcv=pd.DataFrame(ftx_ohlcv, columns=['date','open', 'high', 'low', 'close','volume'])
+ohlcv['date']=pd.to_datetime(ohlcv['date'],unit='ms')
 ohlcv['typical'] = np.mean([ohlcv.high,ohlcv.low,ohlcv.close],axis=0)
 
 
@@ -88,15 +88,12 @@ close=np.round(tickers.close.loc[option],2)
 typical=np.round(ohlcv.typical.values[-1],2)
 var_close=np.round(tickers.percentage.loc[option],2)/100
 
-
 label_price='Precio u$s'
 label_var='Varianza u$s'
 label_volume='Volúmen u$s'
 label_typical='Media Móvil u$s'
 
-delta_close="{:.2%}".format(var_close) +' var diaria'
-
-
+delta_close="{:.2%}".format(var_close) +' var 24hs'
 
 millnames = ['',' K',' M',' B',' T']
 
@@ -113,18 +110,19 @@ col2.metric(label_volume, millify(volume))
 col3.metric(label_var, millify(varianza))
 col4.metric(label_typical, typical) 
 '------------------------------------------------------------------------------------------'
+
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
                vertical_spacing=0.25, subplot_titles=('OHLC', 'Volume'),
                row_width=[0.4 ,0.8])
 # Plot OHLC on 1st row
-fig.add_trace(go.Candlestick(x=ohlcv['timestamp'],
+fig.add_trace(go.Candlestick(x=ohlcv['date'],
                     open=ohlcv.open,
                     high=ohlcv.high,
                     low=ohlcv.low,
                     close=ohlcv.close,name="OHLC", showlegend=False), row=1, col=1)
 # Bar trace for volumes on 2nd row without legend
-fig.add_trace(go.Bar(x=ohlcv.timestamp,y=ohlcv.volume,showlegend=False), row=2, col=1)
+fig.add_trace(go.Bar(x=ohlcv.date,y=ohlcv.volume,showlegend=False), row=2, col=1)
 # Do not show OHLC's rangeslider plot 
 fig.update(layout_xaxis_rangeslider_visible=True)
 fig.update_layout(autosize=False,width=800,height=700)
@@ -139,15 +137,15 @@ with tab1:
 with tab2:
     col1, col2= st.columns(2)
     with col1:
-        'calculadora de criptomoneda a -> USD'
+        'calculadora de criptomoneda a u$s'
         cripto = st.number_input('Insertar el valor en criptomoneda')
         conversion_cripto=cripto*close
-        'El valor de la critomoneda en USD es:',conversion_cripto
+        'El valor de la critomoneda en u$s es:',conversion_cripto
     with col2:
-        'calculadora de USD a -> criptomoneda'
-        usd = st.number_input('Insertar el valor en moneda USD')
+        'calculadora de u$s a  criptomoneda'
+        usd = st.number_input('Insertar el valor en moneda u$s')
         conversion_usd=usd/close
-        'El valor de USD en la criptomoneda es:',conversion_usd
+        'El valor de u$s en la criptomoneda es:',conversion_usd
 with tab3:
     st.plotly_chart(fig,use_container_width=True)
     expander = st.expander("See explanation")
