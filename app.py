@@ -83,10 +83,10 @@ tickers=tickers[cols]
 # se buscan los datos para armar los principales KPI's
 
 varianza=np.round(np.var(ohlcv.close),2)
-volume=np.round(tickers[option].quoteVolume,2)
-close=np.round(tickers[option].close,2)
+volume=np.round(tickers.index[option].quoteVolume,2)
+close=np.round(tickers.index[option].close,2)
 typical=np.round(ohlcv.typical.values[-1],2)
-var_close=np.round(tickers[option].percentage,2)
+var_close=np.round(tickers.index[option].percentage,2)
 
 
 label_price='Precio $'
