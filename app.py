@@ -110,7 +110,7 @@ fig.add_trace(go.Candlestick(x=ohlcv.date,
                     high=ohlcv.high,
                     low=ohlcv.low,
                     close=ohlcv.close, showlegend=False), row=1, col=1)
-fig.add_trace(go.Scatter(x=ohlcv.date, y=ohlcv.typical,mode='lines',marker_color='#A9A9A9',showlegend=False),row=1, col=1)
+fig.add_trace(go.Scatter(x=ohlcv.date, y=ohlcv.media,mode='lines',marker_color='#A9A9A9',line=0.01,showlegend=False),row=1, col=1)
 # Bar trace for volumes on 2nd row without legend
 fig.add_trace(go.Bar(x=ohlcv.date,y=ohlcv.volume,showlegend=False,marker_color='#ff0000'), row=2, col=1)
 # Do not show OHLC's rangeslider plot 
