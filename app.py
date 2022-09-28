@@ -89,10 +89,10 @@ typical=np.round(ohlcv.typical.values[-1],2)
 var_close=np.round(tickers.percentage.loc[option],2)/100
 
 
-label_price='Precio $'
-label_var='Varianza 📈'
-label_volume='Volúmen $'
-label_typical='Media Móvil 📈'
+label_price='Precio u$s'
+label_var='Varianza u$s'
+label_volume='Volúmen u$s'
+label_typical='Media Móvil u$s'
 
 delta_close="{:.2%}".format(var_close)
 
@@ -105,7 +105,7 @@ def millify(n):
     millidx = max(0,min(len(millnames)-1,
                         int(math.floor(0 if n == 0 else math.log10(abs(n))/3))))
 
-    return '{:.0f}{}'.format(n / 10**(3 * millidx), millnames[millidx])
+    return '{:.2f}{}'.format(n / 10**(3 * millidx), millnames[millidx])
 
 col1, col2, col3, col4= st.columns(4)
 col1.metric(label_price, close,delta_close)
