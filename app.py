@@ -4,6 +4,7 @@ import numpy as np
 import plotly.graph_objects as go
 import streamlit as st
 from plotly.subplots import make_subplots
+from datetime import datetime
 from PIL import Image
 import math
 
@@ -35,8 +36,8 @@ st.image(image,use_column_width=True)
 # Draw a title and some text to the app:
 
 '''# Ecosistema de criptomonedas'''
-'_Este dashboard analizará 10 criptomonedas de la plataforma de exchange FTX_'
-'------------------------------------------------------------------------------------------'
+'_Análisis del TOP 10 por volumen de compra de criptomonedas de la plataforma de exchange FTX_'
+'---------------------------------------------------------------------------------------------'
 option = st.selectbox(
         'Seleccionar la criptomoneda a analizar',
         (symbol_list))
@@ -50,20 +51,21 @@ genre = st.radio(
     "Seleccionar el intervalo de tiempo",
     timeframe_list, horizontal=True)
 '------------------------------------------------------------------------------------------'
-ftx= ccxt.ftx() # utilizo phemex Exchange Markets
-symbol=option # simbolo de la moneda
+
+ftx= ccxt.ftx() 
+symbol=option
 timeframe=genre
 
-from datetime import datetime
+
 
 
 now = datetime.now()
 from_ts = ftx.parse8601(now)
 limit=10000
 ohlcv_list = []
-ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit=limit)
+ftx_ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit=limit)
 
-df_market=pd.DataFrame(ohlcv, columns=['timestamp','open', 'high', 'low', 'close','volume'])
+df_market=pd.DataFrame(ftx_ohlcv, columns=['timestamp','open', 'high', 'low', 'close','volume'])
 df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
 df_market['typical'] = np.mean([df_market.high,df_market.low,df_market.close],axis=0)
 df_market['var_close']=df_market.close.pct_change()
@@ -78,10 +80,10 @@ var_close=np.round(df_market.var_close.values[-2],2)
 var_volume=np.round(df_market.var_volume.values[-2],2)
 var_typical=np.round(df_market.var_typical.values[-2],2)
 
-label_price='Precio ＄'
+label_price='Precio $'
 label_var='Varianza 📈'
-label_volume='Volúmen＄'
-label_typical='Media Móvil📈'
+label_volume='Volúmen $'
+label_typical='Media Móvil 📈'
 
 delta_close="{:.2%}".format(var_close)
 delta_volume="{:.2%}".format(var_volume)
