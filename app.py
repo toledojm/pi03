@@ -24,7 +24,7 @@ DOGE='Dogecoin (DOGE) se basa en el popular meme de Internet "doge" y tiene un S
 symbol_list=['BTC/USD','ETH/USD','XRP/USD','SOL/USD','USDT/USD','ETHW/USD','BNB/USD','LINK/USD','FTT/USD','ATOM/USD']
 dic_symbol={'BTC':'BTC/USD','ETH':'ETH/USD','XRP':'XRP/USD','SOL':'SOL/USD','USDT':'USDT/USD','ETHW':'ETHW/USD','BNB':'BNB/USD','LINK':'LINK/USD','FTT':'FTT/USD','ATOM':'ATOM/USD'}
 code_list=['BTC', 'ETH','XRP','SOL','USDT','ETHW', 'BNB', 'LINK','FTT', 'ATOM']
-dic_descripcion={'BTC/USD':BTC,'ETH/USD':ETH,'ADA/USD':ADA,'USDT/USD':USDT,'BNB/USD':BNB,'XRP/USD':XRP,'SOL/USD':SOL,'DOGE/USD':DOGE}
+dic_descripcion={'BTC':BTC,'ETH':ETH,'USDT':USDT,'BNB':BNB,'XRP':XRP,'SOL':SOL}
 dic_name={'ATOM':'Atom','BNB':'Binance Coin','BTC':'Bitcoin','ETH':'Ethereum','ETHW':'Ethereum','FTT':'FTX Token','LINK':'ChainLink Token','SOL':'Solana','XRP':'XRP'}
 image = Image.open('cripto_image.jpg')
 
