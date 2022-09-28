@@ -7,7 +7,7 @@ from plotly.subplots import make_subplots
 from datetime import datetime
 from PIL import Image
 import math
-import info
+from info import *
 
 
 
