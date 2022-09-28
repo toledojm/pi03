@@ -30,7 +30,7 @@ image = Image.open('cripto_image.png')
 
 st.set_page_config(page_icon="📈", page_title="Ecosistema de criptomonedas",layout = 'wide')
 
-st.image(image,use_column_width=True)
+st.image(image)
 
 # Draw a title and some text to the app:
 
