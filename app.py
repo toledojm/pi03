@@ -132,11 +132,7 @@ with tab2:
         'El valor de u$s en la criptomoneda es:',conversion_usd
 with tab3:
     st.plotly_chart(fig,use_container_width=True)
-    expander = st.expander("See explanation")
-    expander.write("""
-        The chart above shows some numbers I picked for you.
-        I rolled actual dice for these, so they're *guaranteed* to
-        be random.
-    """)
+    expander = st.expander(str("Hitos en la historia de "+dic_name[option]))
+    expander.write(dic_hitos[option])
 with tab4:
     st.dataframe(ohlcv,use_container_width=True)
