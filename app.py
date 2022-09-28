@@ -140,4 +140,4 @@ with tab4:
     st.dataframe(ohlcv,use_container_width=True)
 
 
-st.markdown("# Este es un markdown h1 \n ## Este es un h2 \n ### Este es un h3")
+st.markdown(" Este es un markdown h1 \n  Este es un h2 \n  Este es un h3")
