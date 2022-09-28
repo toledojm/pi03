@@ -14,7 +14,7 @@ image = Image.open('cripto_image.png')
 
 
 st.set_page_config(page_icon="📈", page_title="Ecosistema de criptomonedas",layout = "centered", menu_items={
-        'About': "# Este dashboard correponde al PI 03 del cohorte 03 de la carrera de Data Science en Henry."
+        'About': "Este dashboard correponde al PI 03 del cohorte 03 de la carrera de Data Science en Henry."
         })
 st.image(image)
 
@@ -105,11 +105,12 @@ fig = make_subplots(rows=2, cols=1, shared_xaxes=True,
                vertical_spacing=0.25, subplot_titles=(str("Valores Históricos de "+dic_name[option]), 'Volúmen'),
                row_width=[0.4 ,0.8])
 # Plot OHLC on 1st row
-fig.add_trace(go.Candlestick(x=ohlcv['date'],
+fig.add_trace(go.Candlestick(x=ohlcv.date,
                     open=ohlcv.open,
                     high=ohlcv.high,
                     low=ohlcv.low,
                     close=ohlcv.close, showlegend=False), row=1, col=1)
+fig.add_trace(go.line(ohlcv, x=ohlcv.date, y=ohlcv.typical,showlegend=True),row=1, col=1)
 # Bar trace for volumes on 2nd row without legend
 fig.add_trace(go.Bar(x=ohlcv.date,y=ohlcv.volume,showlegend=False,marker_color='#ff0000'), row=2, col=1)
 # Do not show OHLC's rangeslider plot 
