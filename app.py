@@ -141,5 +141,7 @@ with tab3:
 with tab4:
     st.dataframe(ohlcv,use_container_width=True)
 
-
+'---------------------------------------------------------------------------------------------'
+'                                                                                             '
+'                                                                                             '
 st.markdown("libreria ccxt de criptomonedas:https://pypi.org/project/ccxt/  \nmercado exchange:https://ftx.com/  \ninfo mercado criptomonedas:https://coinmarketcap.com/")
