@@ -60,8 +60,8 @@ limit=10000
 ohlcv_list = []
 ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit=limit)
 
-df_market=pd.DataFrame(ohlcv, columns=['time','open', 'high', 'low', 'close','volume'])
-df_market['time']=pd.to_datetime(df_market['time'],unit='ms')
+df_market=pd.DataFrame(ohlcv, columns=['timestamp','open', 'high', 'low', 'close','volume'])
+df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
 df_market['typical'] = np.mean([df_market.high,df_market.low,df_market.close],axis=0)
 df_market['var_close']=df_market.close.pct_change()
 df_market['var_volume']=df_market.volume.pct_change()
@@ -105,19 +105,19 @@ fig = make_subplots(rows=2, cols=1, shared_xaxes=True,
                vertical_spacing=0.25, subplot_titles=('OHLC', 'Volume'),
                row_width=[0.4 ,0.8])
 # Plot OHLC on 1st row
-fig.add_trace(go.Candlestick(x=df_market['time'],
+fig.add_trace(go.Candlestick(x=df_market['timestamp'],
                     open=df_market.open,
                     high=df_market.high,
                     low=df_market.low,
                     close=df_market.close,name="OHLC", showlegend=False), row=1, col=1)
 # Bar trace for volumes on 2nd row without legend
-fig.add_trace(go.Bar(x=df_market.time,y=df_market.volume,showlegend=False), row=2, col=1)
+fig.add_trace(go.Bar(x=df_market.timestamp,y=df_market.volume,showlegend=False), row=2, col=1)
 # Do not show OHLC's rangeslider plot 
 fig.update(layout_xaxis_rangeslider_visible=True)
 fig.update_layout(autosize=False,width=800,height=700)
 
 tickers = pd.DataFrame(ftx.fetch_tickers(symbols=['BTC/USD', 'ETH/USD', 'BNB/USD', 'XRP/USD', 'SOL/USD', 'DOGE/USD'])).T
-tickers.drop(['symbol','time','datetime','high','low','bidVolume','askVolume','vwap','open','last','previousClose','change','average','baseVolume','info'],axis=1,inplace=True)
+tickers.drop(['symbol','timestamp','datetime','high','low','bidVolume','askVolume','vwap','open','last','previousClose','change','average','baseVolume','info'],axis=1,inplace=True)
 
 
 tab1, tab2, tab3 , tab4= st.tabs(["Tabla Criptomonedas","Calculadora","Gráfico Histórico", "Tabla Histórica"])
