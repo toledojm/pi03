@@ -98,9 +98,6 @@ col2.metric(label_volume, millify(volume))
 col3.metric(label_var, millify(varianza))
 col4.metric(label_typical, typical) 
 '------------------------------------------------------------------------------------------'
-
-
-
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
                vertical_spacing=0.25, subplot_titles=(str("Valores Históricos de "+dic_name[option]), 'Volúmen'),
@@ -143,4 +140,3 @@ with tab3:
     """)
 with tab4:
     st.dataframe(ohlcv,use_container_width=True)
-    
