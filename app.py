@@ -124,10 +124,11 @@ tickers = pd.DataFrame(ftx.fetch_tickers(symbols=symbol_list)).T
 currencies=pd.DataFrame(ftx.fetch_currencies()).T
 tickers.drop(['symbol','timestamp','datetime','high','low','bidVolume','askVolume','vwap','open','last','previousClose','change','average','baseVolume','info'],axis=1,inplace=True)
 names = currencies[currencies.code.isin(code_list)].name
+tickers.index=tickers.index.str.replace('/USD','')
 tickers=pd.concat([tickers,names],axis=1)
 cols = list(tickers.columns)
 cols.reverse()
-tickers[cols]
+tickers=tickers[cols]
 
 tab1, tab2, tab3 , tab4= st.tabs(["Tabla Criptomonedas","Calculadora","Gráfico Histórico", "Tabla Histórica"])
 
