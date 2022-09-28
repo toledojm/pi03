@@ -94,7 +94,7 @@ label_var='Varianza 📈'
 label_volume='Volúmen $'
 label_typical='Media Móvil 📈'
 
-delta_close="{:.2%}".format(var_close)
+delta_close="{:.2%}".format(var_close)/100
 
 
 
