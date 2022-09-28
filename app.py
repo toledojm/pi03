@@ -26,7 +26,7 @@ dic_symbol={'BTC':'BTC/USD','ETH':'ETH/USD','XRP':'XRP/USD','SOL':'SOL/USD','USD
 code_list=['BTC', 'ETH','XRP','SOL','USDT','ETHW', 'BNB', 'LINK','FTT', 'ATOM']
 dic_descripcion={'BTC':BTC,'ETH':ETH,'USDT':USDT,'BNB':BNB,'XRP':XRP,'SOL':SOL}
 dic_name={'ATOM':'Atom','BNB':'Binance Coin','BTC':'Bitcoin','ETH':'Ethereum','ETHW':'Ethereum','FTT':'FTX Token','LINK':'ChainLink Token','SOL':'Solana','XRP':'XRP'}
-image = Image.open('cripto_image.jpg')
+image = Image.open('image.jpg')
 
 st.set_page_config(page_icon="📈", page_title="Ecosistema de criptomonedas",layout = 'wide')
 
