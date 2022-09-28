@@ -134,5 +134,6 @@ with tab3:
     st.plotly_chart(fig,use_container_width=True)
     expander = st.expander(str("Hitos en la historia de "+dic_name[option]))
     expander.write(dic_hitos[option])
+    
 with tab4:
     st.dataframe(ohlcv,use_container_width=True)
