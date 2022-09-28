@@ -1,8 +1,13 @@
-from app import *
+import ccxt
+import pandas as pd
+import numpy as np
+from datetime import datetime
+import math
+from app import symbol, timeframe, option
+from info import *
 
 ftx= ccxt.ftx() # se instancia el exchange de FTX
-symbol=dic_symbol[option] # simbolo de la criptomoneda seleccionada por usuario
-timeframe=genre # intervalo de tiempo seleccionado por usuario
+
 
 now = datetime.now() 
 from_ts = ftx.parse8601(now) # busqueda de historial ohlcv para la cripto seleccionada actualizado al momento actual

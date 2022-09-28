@@ -1,4 +1,8 @@
-from app import *
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+from app import option
+from tablas import ohlcv
+from info import *
 
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
