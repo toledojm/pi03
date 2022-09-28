@@ -2,11 +2,11 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from app import option
 from tablas import ohlcv
-from info import *
+import info
 
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
-               vertical_spacing=0.25, subplot_titles=(str("Valores Históricos de "+dic_name[option]), 'Volúmen'),
+               vertical_spacing=0.25, subplot_titles=(str("Valores Históricos de "+info.dic_name[option]), 'Volúmen'),
                row_width=[0.4 ,0.8])
 # Plot OHLC on 1st row
 fig.add_trace(go.Candlestick(x=ohlcv['date'],

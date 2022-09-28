@@ -1,8 +1,8 @@
 import streamlit as st
 from PIL import Image
-from info import *
-from tablas import *
-from graficos import *
+import info
+import tablas
+import graficos
 
 
 
@@ -19,48 +19,52 @@ st.image(image)
 '---------------------------------------------------------------------------------------------'
 option = st.selectbox(
         'Seleccionar la criptomoneda a analizar',
-        (code_list))
+        (info.code_list))
 
-'La selección fue:', dic_name[option]
+'La selección fue:', info.dic_name[option]
 
 expander = st.expander("información detallada de la criptomoneda seleccionada")
-expander.write(dic_info[option])
+expander.write(info.dic_info[option])
 
 genre = st.radio(
     "Seleccionar el intervalo de tiempo",
-    timeframe_list, horizontal=True)
+    info.timeframe_list, horizontal=True)
 '------------------------------------------------------------------------------------------'
 
-symbol=dic_symbol[option] # simbolo de la criptomoneda seleccionada por usuario
+symbol=info.dic_symbol[option] # simbolo de la criptomoneda seleccionada por usuario
 timeframe=genre # intervalo de tiempo seleccionado por usuario
 
+label_price='Precio u$s'
+label_var='Varianza u$s'
+label_volume='Volúmen u$s'
+label_typical='Media Móvil u$s'
 
 col1, col2, col3, col4= st.columns(4)
-col1.metric(label_price, close,delta_close)
-col2.metric(label_volume, millify(volume))
-col3.metric(label_var, millify(varianza))
-col4.metric(label_typical, typical) 
+col1.metric(label_price, tablas.close,tablas.delta_close)
+col2.metric(label_volume, tablas.millify(tablas.volume))
+col3.metric(label_var, tablas.millify(tablas.varianza))
+col4.metric(label_typical, tablas.typical) 
 '------------------------------------------------------------------------------------------'
 
 
 tab1, tab2, tab3 , tab4= st.tabs(["Tabla Criptomonedas","Calculadora","Gráfico Histórico", "Tabla Histórica"])
 
 with tab1:
-    st.dataframe(tickers,use_container_width=True)
+    st.dataframe(tablas.tickers,use_container_width=True)
 with tab2:
     col1, col2= st.columns(2)
     with col1:
         'calculadora de criptomoneda a u$s'
         cripto = st.number_input('Insertar el valor en criptomoneda')
-        conversion_cripto=cripto*close
+        conversion_cripto=cripto*tablas.close
         'El valor de la critomoneda en u$s es:',conversion_cripto
     with col2:
         'calculadora de u$s a  criptomoneda'
         usd = st.number_input('Insertar el valor en moneda u$s')
-        conversion_usd=usd/close
+        conversion_usd=usd/tablas.close
         'El valor de u$s en la criptomoneda es:',conversion_usd
 with tab3:
-    st.plotly_chart(fig,use_container_width=True)
+    st.plotly_chart(graficos.fig,use_container_width=True)
     expander = st.expander("See explanation")
     expander.write("""
         The chart above shows some numbers I picked for you.
@@ -68,5 +72,5 @@ with tab3:
         be random.
     """)
 with tab4:
-    st.dataframe(ohlcv,use_container_width=True)
+    st.dataframe(tablas.ohlcv,use_container_width=True)
     
