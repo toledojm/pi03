@@ -120,7 +120,7 @@ fig.add_trace(go.Candlestick(x=ohlcv['date'],
                     open=ohlcv.open,
                     high=ohlcv.high,
                     low=ohlcv.low,
-                    close=ohlcv.close,name=str("Valores Históricos de",dic_name[option]), showlegend=False), row=1, col=1)
+                    close=ohlcv.close,name=str("Valores Históricos de "+dic_name[option]), showlegend=False), row=1, col=1)
 # Bar trace for volumes on 2nd row without legend
 fig.add_trace(go.Bar(x=ohlcv.date,y=ohlcv.volume,showlegend=False), row=2, col=1)
 # Do not show OHLC's rangeslider plot 
