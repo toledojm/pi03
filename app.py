@@ -11,9 +11,11 @@ from info import *
 
 
 image = Image.open('cripto_image.png')
+items={'Report a bug': "https://www.extremelycoolapp.com/bug",
+        'Acerca': "# Este dashboard correponde al PI 03 del cohorte 03 de la carrera de Data Science en Henry."
+        }
 
-st.set_page_config(page_icon="📈", page_title="Ecosistema de criptomonedas",layout = 'wide')
-
+st.set_page_config(page_icon="📈", page_title="Ecosistema de criptomonedas",layout = "centered", menu_items=items)
 st.image(image)
 
 # Draw a title and some text to the app:
