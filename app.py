@@ -63,9 +63,9 @@ ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit
 df_market=pd.DataFrame(ohlcv, columns=['timestamp','open', 'high', 'low', 'close','volume'])
 df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
 df_market['typical'] = np.mean([df_market.high,df_market.low,df_market.close],axis=0)
-df_market['var_close']=df_market.close.pct_change()*100
-df_market['var_volume']=df_market.volume.pct_change()*100
-df_market['var_typical']=df_market.typical.pct_change()*100
+df_market['var_close']=df_market.close.pct_change()
+df_market['var_volume']=df_market.volume.pct_change()
+df_market['var_typical']=df_market.typical.pct_change()
 
 varianza=np.round(np.var(df_market.close),2)
 volume=np.round(df_market.volume.values[-1],2)
@@ -80,7 +80,10 @@ label_var='Varianza 📈'
 label_volume='Volúmen＄'
 label_typical='Media Móvil📈'
 
-delta_close=str(var_close,'%')
+delta_close="{:.2%}".format(var_close)
+delta_volume="{:.2%}".format(var_volume)
+delta_typical="{:.2%}".format(var_typical)
+
 
 millnames = ['',' K',' M',' B',' T']
 
@@ -93,9 +96,9 @@ def millify(n):
 
 col1, col2, col3, col4= st.columns(4)
 col1.metric(label_price, close,delta_close)
-col2.metric(label_volume, millify(volume),var_volume)
+col2.metric(label_volume, millify(volume),delta_volume)
 col3.metric(label_var, millify(varianza))
-col4.metric(label_typical, typical,var_typical)
+col4.metric(label_typical, typical,delta_typical) 
 '------------------------------------------------------------------------------------------'
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
