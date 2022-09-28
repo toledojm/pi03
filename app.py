@@ -36,7 +36,7 @@ st.image(image,use_column_width=True)
 # Draw a title and some text to the app:
 
 '''# Ecosistema de criptomonedas'''
-'_Análisis del TOP 10 por volumen de compra de criptomonedas de la plataforma de exchange FTX_'
+'_Análisis del TOP 10 por volúmen de compra de criptomonedas de la plataforma de exchange FTX_'
 '---------------------------------------------------------------------------------------------'
 option = st.selectbox(
         'Seleccionar la criptomoneda a analizar',
@@ -52,33 +52,43 @@ genre = st.radio(
     timeframe_list, horizontal=True)
 '------------------------------------------------------------------------------------------'
 
-ftx= ccxt.ftx() 
-symbol=option
-timeframe=genre
 
+ftx= ccxt.ftx() # se instancia el exchange de FTX
+symbol=option # simbolo de la criptomoneda seleccionada por usuario
+timeframe=genre # intervalo de tiempo seleccionado por usuario
 
-
-
-now = datetime.now()
-from_ts = ftx.parse8601(now)
-limit=10000
-ohlcv_list = []
+now = datetime.now() 
+from_ts = ftx.parse8601(now) # busqueda de historial ohlcv para la cripto seleccionada actualizado al momento actual
+limit=10000 # cantidad de datos a brindar por el historial ohlcv
 ftx_ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit=limit)
 
-df_market=pd.DataFrame(ftx_ohlcv, columns=['timestamp','open', 'high', 'low', 'close','volume'])
-df_market['timestamp']=pd.to_datetime(df_market['timestamp'],unit='ms')
-df_market['typical'] = np.mean([df_market.high,df_market.low,df_market.close],axis=0)
-df_market['var_close']=df_market.close.pct_change()
-df_market['var_volume']=df_market.volume.pct_change()
-df_market['var_typical']=df_market.typical.pct_change()
+# se crea la tabla para graficar el historial ohlcv
 
-varianza=np.round(np.var(df_market.close),2)
-volume=np.round(df_market.volume.values[-1],2)
-close=np.round(df_market.close.values[-1],2)
-typical=np.round(df_market.typical.values[-1],2)
-var_close=np.round(df_market.var_close.values[-2],2)
-var_volume=np.round(df_market.var_volume.values[-2],2)
-var_typical=np.round(df_market.var_typical.values[-2],2)
+ohlcv=pd.DataFrame(ftx_ohlcv, columns=['timestamp','open', 'high', 'low', 'close','volume'])
+ohlcv['timestamp']=pd.to_datetime(ohlcv['timestamp'],unit='ms')
+ohlcv['typical'] = np.mean([ohlcv.high,ohlcv.low,ohlcv.close],axis=0)
+
+
+# se crea la tabla de criptomoedas con el TOP 10 por volumen del exchange FTX
+
+tickers = pd.DataFrame(ftx.fetch_tickers(symbols=symbol_list)).T
+currencies=pd.DataFrame(ftx.fetch_currencies()).T
+tickers.drop(['symbol','timestamp','datetime','high','low','bidVolume','askVolume','vwap','open','last','previousClose','change','average','baseVolume','info'],axis=1,inplace=True)
+names = currencies[currencies.code.isin(code_list)].name
+tickers.index=tickers.index.str.replace('/USD','')
+tickers=pd.concat([tickers,names],axis=1)
+cols = list(tickers.columns)
+cols.reverse()
+tickers=tickers[cols]
+
+# se buscan los datos para armar los principales KPI's
+
+varianza=np.round(np.var(ohlcv.close),2)
+volume=np.round(tickers[dic[option]].quoteVolume,2)
+close=np.round(tickers[dic[option]].close,2)
+typical=np.round(ohlcv.typical.values[-1],2)
+var_close=np.round(tickers[dic[option]].percentage,2)
+
 
 label_price='Precio $'
 label_var='Varianza 📈'
@@ -86,8 +96,7 @@ label_volume='Volúmen $'
 label_typical='Media Móvil 📈'
 
 delta_close="{:.2%}".format(var_close)
-delta_volume="{:.2%}".format(var_volume)
-delta_typical="{:.2%}".format(var_typical)
+
 
 
 millnames = ['',' K',' M',' B',' T']
@@ -101,36 +110,28 @@ def millify(n):
 
 col1, col2, col3, col4= st.columns(4)
 col1.metric(label_price, close,delta_close)
-col2.metric(label_volume, millify(volume),delta_volume)
+col2.metric(label_volume, millify(volume))
 col3.metric(label_var, millify(varianza))
-col4.metric(label_typical, typical,delta_typical) 
+col4.metric(label_typical, typical) 
 '------------------------------------------------------------------------------------------'
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
                vertical_spacing=0.25, subplot_titles=('OHLC', 'Volume'),
                row_width=[0.4 ,0.8])
 # Plot OHLC on 1st row
-fig.add_trace(go.Candlestick(x=df_market['timestamp'],
-                    open=df_market.open,
-                    high=df_market.high,
-                    low=df_market.low,
-                    close=df_market.close,name="OHLC", showlegend=False), row=1, col=1)
+fig.add_trace(go.Candlestick(x=ohlcv['timestamp'],
+                    open=ohlcv.open,
+                    high=ohlcv.high,
+                    low=ohlcv.low,
+                    close=ohlcv.close,name="OHLC", showlegend=False), row=1, col=1)
 # Bar trace for volumes on 2nd row without legend
-fig.add_trace(go.Bar(x=df_market.timestamp,y=df_market.volume,showlegend=False), row=2, col=1)
+fig.add_trace(go.Bar(x=ohlcv.timestamp,y=ohlcv.volume,showlegend=False), row=2, col=1)
 # Do not show OHLC's rangeslider plot 
 fig.update(layout_xaxis_rangeslider_visible=True)
 fig.update_layout(autosize=False,width=800,height=700)
 
 
-tickers = pd.DataFrame(ftx.fetch_tickers(symbols=symbol_list)).T
-currencies=pd.DataFrame(ftx.fetch_currencies()).T
-tickers.drop(['symbol','timestamp','datetime','high','low','bidVolume','askVolume','vwap','open','last','previousClose','change','average','baseVolume','info'],axis=1,inplace=True)
-names = currencies[currencies.code.isin(code_list)].name
-tickers.index=tickers.index.str.replace('/USD','')
-tickers=pd.concat([tickers,names],axis=1)
-cols = list(tickers.columns)
-cols.reverse()
-tickers=tickers[cols]
+
 
 tab1, tab2, tab3 , tab4= st.tabs(["Tabla Criptomonedas","Calculadora","Gráfico Histórico", "Tabla Histórica"])
 
@@ -157,5 +158,5 @@ with tab3:
         be random.
     """)
 with tab4:
-    st.dataframe(df_market,use_container_width=True)
+    st.dataframe(ohlcv,use_container_width=True)
     
