@@ -94,7 +94,7 @@ label_var='Varianza u$s'
 label_volume='Volúmen u$s'
 label_typical='Media Móvil u$s'
 
-delta_close="{:.2%}".format(var_close)
+delta_close="{:.2%}".format(var_close) +' var diaria'
 
 
 
