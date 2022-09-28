@@ -86,8 +86,8 @@ varianza=np.round(np.var(ohlcv.close),2)
 volume=np.round(tickers.quoteVolume.loc[option],2)
 close=np.round(tickers.close.loc[option],2)
 typical=np.round(ohlcv.typical.values[-1],2)
-var_close1=np.round(tickers.percentage.loc[option],2)/100
-var_close=0.04
+var_close=np.round(tickers.percentage.loc[option],2)/100
+
 
 label_price='Precio u$s'
 label_var='Varianza u$s'
