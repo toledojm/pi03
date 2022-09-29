@@ -104,7 +104,7 @@ col4.metric(label_media, media)
 '------------------------------------------------------------------------------------------'
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
-               vertical_spacing=0.25, subplot_titles=(str("Valores Históricos de "+dic_name[option]), 'Volúmen'),
+               vertical_spacing=0.4, subplot_titles=(str("Valores Históricos de "+dic_name[option]), 'Volúmen'),
                row_width=[0.4 ,0.8])
 # Plot OHLC on 1st row
 fig.add_trace(go.Candlestick(x=ohlcv.date,
@@ -116,9 +116,9 @@ fig.update_layout(
     yaxis_title='Precio u$s',
     shapes = [dict(
         x0='2021-12-05', x1='2021-12-05', y0=0, y1=1, xref='x', yref='paper',
-        line_width=2)],
+        line_width=1)],
     annotations=[dict(
-        x='2021-12-05', y=0.05, xref='x', yref='paper',
+        x='2021-12-05', y=1, xref='x', yref='paper',
         showarrow=False, xanchor='left', text='Increase Period Begins')]
 )
 
