@@ -54,7 +54,7 @@ ftx_ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, l
 
 ohlcv=pd.DataFrame(ftx_ohlcv, columns=['date','open', 'high', 'low', 'close','volume'])
 ohlcv['date']=pd.to_datetime(ohlcv['date'],unit='ms')
-ohlcv['media'] = ohlcv.close.rolling(4).mean()
+ohlcv['media'] = ohlcv.close.rolling(1).mean()
 
 
 # se crea la tabla de criptomoedas con el TOP 10 por volumen del exchange FTX
