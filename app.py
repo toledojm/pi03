@@ -9,6 +9,8 @@ import numpy as np
 from datetime import datetime
 from info import *
 
+CURRENT_THEME = "dark"
+IS_DARK_THEME = True
 
 image = Image.open('cripto_image.png')
 
