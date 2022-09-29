@@ -103,7 +103,7 @@ col4.metric(label_media, media)
 # se crea el grafico tipo candle con el historico de precio y media movil y volúmen
 fig = make_subplots(rows=2, cols=1, 
                     shared_xaxes=True, 
-                    vertical_spacing=0.8, 
+                    vertical_spacing=0.1, 
                     subplot_titles=(str("Valores Históricos en u$s del "+dic_name[option]), 'Volúmen en u$s'),
                     row_width=[0.4 ,0.8])
 # Plot OHLC on 1st row
