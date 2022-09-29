@@ -1,6 +1,7 @@
 import streamlit as st
 from PIL import Image
 import math
+import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import ccxt
@@ -101,35 +102,29 @@ col1.metric(label_price, close,delta_close)
 col2.metric(label_volume, millify(volume))
 col3.metric(label_var, millify(varianza))
 col4.metric(label_media, media) 
+
 '------------------------------------------------------------------------------------------'
 # Create subplots and mention plot grid size
-fig = make_subplots(rows=2, cols=1, shared_xaxes=True, 
-               vertical_spacing=0.01, subplot_titles=(str("Valores Históricos de "+dic_name[option]), 'Volúmen'),
-               row_width=[0.4 ,0.8])
-# Plot OHLC on 1st row
-fig.add_trace(go.Candlestick(x=ohlcv.date,
+fig = make_subplots(rows=2, cols=1, 
+                    shared_xaxes=True, 
+                    vertical_spacing=0.01, 
+                    subplot_titles=(str("Valores Históricos de "+dic_name[option]), 'Volúmen'),
+                    row_width=[0.4 ,0.8])
+
+fig.add_trace(go.candlestick(x=ohlcv.date,
                     open=ohlcv.open,
                     high=ohlcv.high,
                     low=ohlcv.low,
                     close=ohlcv.close,showlegend=False), row=1, col=1)
-fig.update_layout(
-    yaxis_title='Precio u$s',
-    shapes = [dict(
-        x0='2021-12-05', x1='2021-12-05', y0=0, y1=0.5, xref='x1', yref='paper',
-        line_width=1)],
-    annotations=[dict(
-        x='2021-12-05', y=0.5, xref='x1', yref='paper',
-        showarrow=False, xanchor='left', text='Increase Period Begins')]
-)
-fig.update_xaxes(showgrid=True, gridwidth=0.5, gridcolor='LightPink')
-fig.update_yaxes(showgrid=True, gridwidth=0.5, gridcolor='LightPink')
 
-fig.add_trace(go.Scatter(x=ohlcv.date, y=ohlcv.media,mode='lines',marker_color='#A9A9A9',showlegend=False,line=dict(width=0.5)),row=1, col=1)
-# Bar trace for volumes on 2nd row without legend
-fig.add_trace(go.Bar(x=ohlcv.date,y=ohlcv.volume,showlegend=False,marker_color='#ff0000'), row=2, col=1)
-# Do not show OHLC's rangeslider plot 
+fig.add_trace(px.line(x=ohlcv.date, y=ohlcv.media,mode='lines',marker_color='#A9A9A9',showlegend=False,line=dict(width=0.5)),row=1, col=1)
+
+fig.add_trace(px.bar(x=ohlcv.date,y=ohlcv.volume,showlegend=False,marker_color='#ff0000'), row=2, col=1)
+
 fig.update(layout_xaxis_rangeslider_visible=False)
 fig.update_layout(autosize=False,width=800,height=700)
+fig.update_xaxes(showgrid=True, gridwidth=0.5, gridcolor='#C0C0C0')
+fig.update_yaxes(showgrid=True, gridwidth=0.5, gridcolor='#C0C0C0')
 
 tab1, tab2, tab3 , tab4= st.tabs(["Tabla Criptomonedas","Calculadora","Gráfico Histórico", "Tabla Histórica"])
 
