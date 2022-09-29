@@ -2,7 +2,7 @@ import streamlit as st
 from PIL import Image
 import math
 import plotly.express as px
-import plotly.graph_objects as go
+import plotly.graph_objects as go 
 from plotly.subplots import make_subplots
 import ccxt
 import pandas as pd
@@ -115,11 +115,22 @@ fig.add_trace(go.candlestick(x=ohlcv.date,
                     open=ohlcv.open,
                     high=ohlcv.high,
                     low=ohlcv.low,
-                    close=ohlcv.close,showlegend=False), row=1, col=1)
+                    close=ohlcv.close,showlegend=False), 
+                    row=1, col=1)
 
-fig.add_trace(go.Scatter(x=ohlcv.date, y=ohlcv.media,mode='lines',marker_color='#A9A9A9',showlegend=False,line=dict(width=0.5)),row=1, col=1)
+fig.add_trace(go.Scatter(x=ohlcv.date, 
+                        y=ohlcv.media,
+                        mode='lines',
+                        marker_color='#A9A9A9',
+                        showlegend=False,
+                        line=dict(width=0.5)),
+                        row=1, col=1)
 
-fig.add_trace(go.Bar(x=ohlcv.date,y=ohlcv.volume,showlegend=False,marker_color='#ff0000'), row=2, col=1)
+fig.add_trace(go.Bar(x=ohlcv.date,
+                    y=ohlcv.volume,
+                    showlegend=False,
+                    marker_color='#ff0000'), 
+                    row=2, col=1)
 
 fig.update(layout_xaxis_rangeslider_visible=False)
 fig.update_layout(autosize=False,width=800,height=700)
