@@ -119,7 +119,7 @@ fig.update_layout(
         line_width=2)],
     annotations=[dict(
         x='2021-12-05', y=0.05, xref='x', yref='paper',
-        showarrow=False, xanchor='left', text='Increase Period Begins')]
+        showarrow=False, xanchor='left', text='Increase Period Begins')], row=1, col=1
 )
 
 
