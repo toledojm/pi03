@@ -111,7 +111,7 @@ fig = make_subplots(rows=2, cols=1,
                     subplot_titles=(str("Valores Históricos de "+dic_name[option]), 'Volúmen'),
                     row_width=[0.4 ,0.8])
 
-fig.add_trace(go.candlestick(x=ohlcv.date,
+fig.add_trace(go.Candlestick(x=ohlcv.date,
                     open=ohlcv.open,
                     high=ohlcv.high,
                     low=ohlcv.low,
