@@ -121,7 +121,7 @@ fig.update_layout(
         x='2021-12-05', y=0.5, xref='x1', yref='paper',
         showarrow=False, xanchor='left', text='Increase Period Begins')]
 )
-fig.update_xaxes(showgrid=True,grid="dot" gridwidth=0.5, gridcolor='LightPink')
+fig.update_xaxes(showgrid=True, gridwidth=0.5, gridcolor='LightPink')
 fig.update_yaxes(showgrid=True, gridwidth=0.5, gridcolor='LightPink')
 
 fig.add_trace(go.Scatter(x=ohlcv.date, y=ohlcv.media,mode='lines',marker_color='#A9A9A9',showlegend=False,line=dict(width=0.5)),row=1, col=1)
