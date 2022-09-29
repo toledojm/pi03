@@ -47,7 +47,7 @@ ftx= ccxt.ftx() # se instancia el exchange de FTX
 
 now = datetime.now() 
 from_ts = ftx.parse8601(now) # busqueda de historial ohlcv para la cripto seleccionada actualizado al momento actual
-limit=10000 # cantidad de datos a brindar por el historial ohlcv
+limit=20000 # cantidad de datos a brindar por el historial ohlcv
 ftx_ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit=limit)
 
 # se crea la tabla para graficar el historial ohlcv
