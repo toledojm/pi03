@@ -121,7 +121,7 @@ fig = make_subplots(rows=2, cols=1,
                     vertical_spacing=0.1, 
                     subplot_titles=(str("Valores Históricos de "+dic_name[option]), 'Volúmen'),
                     row_width=[0.4 ,0.8],
-                    layout=layout)
+                    )
 
 fig.add_trace(go.Candlestick(x=ohlcv.date,
                     open=ohlcv.open,
@@ -145,7 +145,7 @@ fig.add_trace(go.Bar(x=ohlcv.date,
                     row=2, col=1)
 
 fig.update(layout_xaxis_rangeslider_visible=False)
-fig.update_layout(width=800,height=700)
+fig.update_layout(layout=layout,width=800,height=700)
 
 tab1, tab2, tab3 , tab4= st.tabs(["Tabla Criptomonedas","Calculadora","Gráfico Histórico", "Tabla Histórica"])
 
