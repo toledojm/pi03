@@ -111,7 +111,7 @@ fig.add_trace(go.Candlestick(x=ohlcv.date,
                     open=ohlcv.open,
                     high=ohlcv.high,
                     low=ohlcv.low,
-                    close=ohlcv.close,showlegend=False,yaxis_title='Precio u$s',
+                    close=ohlcv.close,showlegend=False,
     shapes = [dict(
         x0='2021-12-05', x1='2021-12-05', y0=0, y1=1, xref='x', yref='paper',
         line_width=2)],
