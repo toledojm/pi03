@@ -111,16 +111,14 @@ fig.add_trace(go.Candlestick(x=ohlcv.date,
                     open=ohlcv.open,
                     high=ohlcv.high,
                     low=ohlcv.low,
-                    close=ohlcv.close,showlegend=False), row=1, col=1)
-fig.add_trace(
-    yaxis_title='Precio u$s',
+                    close=ohlcv.close,showlegend=False,yaxis_title='Precio u$s',
     shapes = [dict(
         x0='2021-12-05', x1='2021-12-05', y0=0, y1=1, xref='x', yref='paper',
         line_width=2)],
     annotations=[dict(
         x='2021-12-05', y=0.05, xref='x', yref='paper',
-        showarrow=False, xanchor='left', text='Increase Period Begins')], row=1, col=1
-)
+        showarrow=False, xanchor='left', text='Increase Period Begins')]), row=1, col=1)
+
 
 
 fig.add_trace(go.Scatter(x=ohlcv.date, y=ohlcv.media,mode='lines',marker_color='#A9A9A9',showlegend=False,line=dict(width=0.5)),row=1, col=1)
