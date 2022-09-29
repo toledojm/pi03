@@ -134,8 +134,8 @@ fig.add_trace(go.Bar(x=ohlcv.date,
 
 fig.update(layout_xaxis_rangeslider_visible=False)
 fig.update_layout(width=800,height=700)
-fig.update_xaxes(showgrid=False, gridwidth=0.05, gridcolor='#C0C0C0')
-fig.update_yaxes(showgrid=True, gridwidth=0.05, gridcolor='#C0C0C0')
+fig.update_xaxes(showgrid=False)
+fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='#C0C0C0')
 
 tab1, tab2, tab3 , tab4= st.tabs(["Tabla Criptomonedas","Calculadora","Gráfico Histórico", "Tabla Histórica"])
 
