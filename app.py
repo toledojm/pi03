@@ -1,8 +1,7 @@
 import streamlit as st
 from PIL import Image
 import math
-import plotly.express as px
-import plotly.graph_objects as go 
+import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import ccxt
 import pandas as pd
@@ -107,33 +106,24 @@ col4.metric(label_media, media)
 # Create subplots and mention plot grid size
 fig = make_subplots(rows=2, cols=1, 
                     shared_xaxes=True, 
-                    vertical_spacing=0.1, 
+                    vertical_spacing=0.01, 
                     subplot_titles=(str("Valores Históricos de "+dic_name[option]), 'Volúmen'),
                     row_width=[0.4 ,0.8])
-
+# Plot OHLC on 1st row
 fig.add_trace(go.Candlestick(x=ohlcv.date,
                     open=ohlcv.open,
                     high=ohlcv.high,
                     low=ohlcv.low,
-                    close=ohlcv.close,showlegend=False), 
-                    row=1, col=1)
+                    close=ohlcv.close,showlegend=False), row=1, col=1)
 
-fig.add_trace(go.Scatter(x=ohlcv.date, 
-                        y=ohlcv.media,
-                        mode='lines',
-                        marker_color='#A9A9A9',
-                        showlegend=False,
-                        line=dict(width=0.8)),
-                        row=1, col=1)
+fig.add_trace(go.Scatter(x=ohlcv.date, y=ohlcv.media,mode='lines',marker_color='#A9A9A9',showlegend=False,line=dict(width=0.5)),row=1, col=1)
 
-fig.add_trace(go.Bar(x=ohlcv.date,
-                    y=ohlcv.volume,
-                    showlegend=False,
-                    marker_color='#ff0000'), 
-                    row=2, col=1)
+fig.add_trace(go.Bar(x=ohlcv.date,y=ohlcv.volume,showlegend=False,marker_color='#ff0000'), row=2, col=1)
 
 fig.update(layout_xaxis_rangeslider_visible=False)
-fig.update_layout(width=800,height=700)
+fig.update_layout(autosize=False,width=800,height=700)
+fig.update_xaxes(showgrid=True, gridwidth=0.5, gridcolor='LightPink')
+fig.update_yaxes(showgrid=True, gridwidth=0.5, gridcolor='LightPink')
 
 tab1, tab2, tab3 , tab4= st.tabs(["Tabla Criptomonedas","Calculadora","Gráfico Histórico", "Tabla Histórica"])
 
