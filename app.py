@@ -135,7 +135,7 @@ fig.add_trace(go.Scatter(x=ohlcv.date,
                         mode='lines',
                         marker_color='#A9A9A9',
                         showlegend=False,
-                        line=dict(width=0.8)),
+                        line=dict(width=0.4)),
                         row=1, col=1)
 
 fig.add_trace(go.Bar(x=ohlcv.date,
