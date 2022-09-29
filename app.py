@@ -108,11 +108,11 @@ col4.metric(label_media, media)
 layout = go.Layout(
                     xaxis=dict(
                     showgrid=False, # Hide Gridlines
-                    showline=False, # Hide X-Axis
+                    showline=False # Hide X-Axis
                     ),
                     yaxis=dict(
                     showgrid=False, # Hide Gridlines
-                    showline=False, # Hide X-Axis
+                    showline=False # Hide X-Axis
                     )
                     )
 
