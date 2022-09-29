@@ -113,14 +113,14 @@ layout = go.Layout(
                     yaxis=dict(
                     showgrid=False, # Hide Gridlines
                     showline=False, # Hide X-Axis
-                    ),
+                    )
                     )
 
 fig = make_subplots(rows=2, cols=1, 
                     shared_xaxes=True, 
                     vertical_spacing=0.1, 
                     subplot_titles=(str("Valores Históricos de "+dic_name[option]), 'Volúmen'),
-                    row_width=[0.4 ,0.8],
+                    row_width=[0.4 ,0.8]
                     )
 
 fig.add_trace(go.Candlestick(x=ohlcv.date,
