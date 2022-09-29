@@ -47,7 +47,7 @@ ftx= ccxt.ftx() # se instancia el exchange de FTX
 
 now = datetime.now() 
 from_ts = ftx.parse8601(now) # busqueda de historial ohlcv para la cripto seleccionada actualizado al momento actual
-limit=20000 # cantidad de datos a brindar por el historial ohlcv
+limit=10000 # cantidad de datos a brindar por el historial ohlcv
 ftx_ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit=limit)
 
 # se crea la tabla para graficar el historial ohlcv
@@ -112,7 +112,12 @@ fig.add_trace(go.Candlestick(x=ohlcv.date,
                     high=ohlcv.high,
                     low=ohlcv.low,
                     close=ohlcv.close,showlegend=False), row=1, col=1)
-fig.update_layout(yaxis_title='Precio u$s',annotations=[dict(x='2021-12-05', showarrow=False, text='Increase Period Begins')])
+fig.update_layout(
+    yaxis_title='Precio u$s',
+    annotations=[dict(
+        x='2021-12-05', y=0.05, xref='x', yref='paper',
+        showarrow=False, xanchor='left', text='Increase Period Begins')]
+)
 
 
 fig.add_trace(go.Scatter(x=ohlcv.date, y=ohlcv.media,mode='lines',marker_color='#A9A9A9',showlegend=False,line=dict(width=0.5)),row=1, col=1)
