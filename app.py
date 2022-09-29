@@ -12,19 +12,18 @@ from info import *
 CURRENT_THEME = "dark"
 IS_DARK_THEME = True
 
-image = Image.open('cripto_image.png')
-
-
 st.set_page_config(page_icon="📈", page_title="Ecosistema de criptomonedas",layout = "centered", menu_items={
         'About': "Este dashboard correponde al PI 03 del cohorte 03 de la carrera de Data Science en Henry."
         })
+
+image = Image.open('cripto_image.png')
 st.image(image)
 
-# Draw a title and some text to the app:
 
 '''# Ecosistema de criptomonedas'''
 '_Análisis del TOP 10 por volúmen de compra de criptomonedas de la plataforma de exchange FTX_'
 '---------------------------------------------------------------------------------------------'
+# se arma la lista para elección de la cripto
 option = st.selectbox(
         'Seleccionar la criptomoneda a analizar',
         (code_list))
@@ -44,11 +43,10 @@ timeframe=genre # intervalo de tiempo seleccionado por usuario
 
 ftx= ccxt.ftx() # se instancia el exchange de FTX
 
-
 now = datetime.now() 
 from_ts = ftx.parse8601(now) # busqueda de historial ohlcv para la cripto seleccionada actualizado al momento actual
 limit=10000 # cantidad de datos a brindar por el historial ohlcv
-ftx_ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit=limit)
+ftx_ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit=limit)# se busca el registro histórico
 
 # se crea la tabla para graficar el historial ohlcv
 
@@ -56,12 +54,13 @@ ohlcv=pd.DataFrame(ftx_ohlcv, columns=['date','open', 'high', 'low', 'close','vo
 ohlcv['date']=pd.to_datetime(ohlcv['date'],unit='ms')
 ohlcv['media'] = ohlcv.close.rolling(30).mean()
 
-
 # se crea la tabla de criptomoedas con el TOP 10 por volumen del exchange FTX
 
 tickers = pd.DataFrame(ftx.fetch_tickers(symbols=symbol_list)).T
 currencies=pd.DataFrame(ftx.fetch_currencies()).T
-tickers.drop(['symbol','timestamp','datetime','high','low','bidVolume','askVolume','vwap','open','last','previousClose','change','average','baseVolume','info'],axis=1,inplace=True)
+tickers.drop(['symbol','timestamp','datetime','high','low',
+            'bidVolume','askVolume','vwap','open','last','previousClose',
+            'change','average','baseVolume','info'],axis=1,inplace=True)
 names = currencies[currencies.code.isin(code_list)].name
 tickers.index=tickers.index.str.replace('/USD','')
 tickers=pd.concat([tickers,names],axis=1)
@@ -88,9 +87,7 @@ def millify(n):
 
     return '{:.2f}{}'.format(n / 10**(3 * millidx), millnames[millidx])
 
-
-
-
+# se crean los KPIs
 label_price='Precio u$s'
 label_var='Varianza u$s'
 label_volume='Volúmen u$s'
@@ -103,11 +100,11 @@ col3.metric(label_var, millify(varianza))
 col4.metric(label_media, media) 
 
 '------------------------------------------------------------------------------------------'
-# Create subplots and mention plot grid size
+# se crea el grafico tipo candle con el historico de precio y media movil y volúmen
 fig = make_subplots(rows=2, cols=1, 
                     shared_xaxes=True, 
                     vertical_spacing=0.1, 
-                    subplot_titles=(str("Valores Históricos de "+dic_name[option]), 'Volúmen'),
+                    subplot_titles=(str("Valores Históricos en u$s"+dic_name[option]), 'Volúmen en u$s'),
                     row_width=[0.4 ,0.8])
 # Plot OHLC on 1st row
 fig.add_trace(go.Candlestick(x=ohlcv.date,
@@ -116,14 +113,27 @@ fig.add_trace(go.Candlestick(x=ohlcv.date,
                     low=ohlcv.low,
                     close=ohlcv.close,showlegend=False), row=1, col=1)
 
-fig.add_trace(go.Scatter(x=ohlcv.date, y=ohlcv.media,mode='lines',marker_color='#A9A9A9',showlegend=False,line=dict(width=0.5)),row=1, col=1)
+fig.add_trace(go.Scatter(x=ohlcv.date, 
+                        y=ohlcv.media,
+                        mode='lines',
+                        marker_color='#A9A9A9',
+                        showlegend=False,
+                        line=dict(width=0.5)),
+                        row=1, col=1)
 
-fig.add_trace(go.Bar(x=ohlcv.date,y=ohlcv.volume,showlegend=False,marker_color='#ff0000'), row=2, col=1)
+fig.add_trace(go.Bar(x=ohlcv.date,
+                    y=ohlcv.volume,
+                    showlegend=False,
+                    marker_color='#ff0000'), 
+                    row=2, col=1)
 
 fig.update(layout_xaxis_rangeslider_visible=False)
 fig.update_layout(autosize=False,width=800,height=700)
 fig.update_xaxes(showgrid=False)
 fig.update_yaxes(showgrid=True, gridwidth=0.1, gridcolor='#F2D7D5')
+
+
+# se crean las tabs para mostrar las tablas, caluculadora y gráficos
 
 tab1, tab2, tab3 , tab4= st.tabs(["Tabla Criptomonedas","Calculadora","Gráfico Histórico", "Tabla Histórica"])
 
