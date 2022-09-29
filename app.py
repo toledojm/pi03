@@ -133,7 +133,7 @@ fig.add_trace(go.Bar(x=ohlcv.date,
                     row=2, col=1)
 
 fig.update(layout_xaxis_rangeslider_visible=False)
-fig.update_layout(autosize=False,width=800,height=700)
+fig.update_layout(width=800,height=700)
 fig.update_xaxes(showgrid=False, gridwidth=0.05, gridcolor='#C0C0C0')
 fig.update_yaxes(showgrid=True, gridwidth=0.05, gridcolor='#C0C0C0')
 
