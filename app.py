@@ -192,7 +192,7 @@ with tab4:
                         line=dict(width=0.8)))
 
     fig2.update_xaxes(showgrid=False)
-    fig2.update_yaxes(showgrid=False)
+    fig2.update_yaxes(showgrid=False,yaxis_title="Porcentaje %")
     st.plotly_chart(fig2,use_container_width=True)
 
 with tab5:
