@@ -21,7 +21,7 @@ st.image(image)
 
 
 '''# Ecosistema de criptomonedas'''
-'_Análisis del TOP 10 por volúmen de compra de criptomonedas de la plataforma de exchange FTX_'
+'_Análisis del TOP 10 por volúmen de operación de criptomonedas de la plataforma de exchange FTX_'
 '---------------------------------------------------------------------------------------------'
 # se arma la lista para elección de la cripto
 option = st.selectbox(
