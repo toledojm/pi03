@@ -189,7 +189,9 @@ with tab4:
                         marker_color='#F2D7D5',
                         name=symbol2,
                         line=dict(width=1)))
-    
+
+    fig.update_xaxes(showgrid=False)
+    fig.update_yaxes(showgrid=False)
     st.plotly_chart(fig2,use_container_width=True)
 
 with tab5:
