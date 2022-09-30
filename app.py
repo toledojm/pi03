@@ -182,7 +182,7 @@ with tab4:
                         line=dict(width=1)))
 
     fig2.add_trace(go.Scatter(x=ohlcv_2.date, 
-                        y=ohlcv.close,
+                        y=ohlcv_2.close,
                         mode='lines',
                         marker_color='#F2D7D5',
                         name=symbol2,
