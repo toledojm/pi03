@@ -172,7 +172,7 @@ with tab4:
 
     ftx_ohlcv_2 = ftx.fetch_ohlcv(symbol=comp, timeframe=timeframe, since=from_ts, limit=limit)# se busca el registro histórico
     ohlcv_2=pd.DataFrame(ftx_ohlcv_2, columns=['date','open', 'high', 'low', 'close','volume'])
-    ohlcv_2['date']=pd.to_datetime(ohlcv['date'],unit='ms')
+    ohlcv_2['date']=pd.to_datetime(ohlcv_2['date'],unit='ms')
  
     fig2 = go.Figure()
     
@@ -189,6 +189,7 @@ with tab4:
                         marker_color='#F2D7D5',
                         name=symbol2,
                         line=dict(width=1)))
+    
     st.plotly_chart(fig2,use_container_width=True)
 
 with tab5:
