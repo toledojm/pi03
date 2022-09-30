@@ -185,7 +185,7 @@ with tab4:
                         y=ohlcv.close,
                         mode='lines',
                         marker_color='#F2D7D5',
-                        sname=symbol2,
+                        name=symbol2,
                         line=dict(width=1)))
 
 
