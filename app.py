@@ -190,8 +190,8 @@ with tab4:
                         name=symbol2,
                         line=dict(width=1)))
 
-    fig.update_xaxes(showgrid=False)
-    fig.update_yaxes(showgrid=False)
+    fig2.update_xaxes(showgrid=False)
+    fig2.update_yaxes(showgrid=False)
     st.plotly_chart(fig2,use_container_width=True)
 
 with tab5:
