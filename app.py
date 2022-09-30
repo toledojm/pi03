@@ -49,7 +49,6 @@ now = datetime.now()
 from_ts = ftx.parse8601(now) # busqueda de historial ohlcv para la cripto seleccionada actualizado al momento actual
 limit=10000 # cantidad de datos a brindar por el historial ohlcv
 ftx_ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit=limit)# se busca el registro histórico
-ftx_ohlcv_2 = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit=limit)# se busca el registro histórico
 
 # se crea la tabla para graficar el historial ohlcv
 
@@ -168,11 +167,14 @@ with tab3:
 with tab4:
     symbol2 = st.radio(
     "Seleccionar una criptomoneda para comparar su tendencia",
-    symbol_list, horizontal=True)
+    code_list, horizontal=True)
+
+    comp=dic_symbol[symbol2]
     
-    ftx_ohlcv_2 = ftx.fetch_ohlcv(symbol=symbol2, timeframe=timeframe, since=from_ts, limit=limit)# se busca el registro histórico
-    
-    ohlcv_2=pd.DataFrame(ftx_ohlcv_2, columns=['date','open', 'high', 'low', 'close','volume'])
+    ftx_ohlcv_2 = ftx.fetch_ohlcv(symbol=comp, timeframe=timeframe, since=from_ts, limit=limit)# se busca el registro histórico
+    ohlcv_2=pd.DataFrame(ftx_ohlcv, columns=['date','open', 'high', 'low', 'close','volume'])
+    ohlcv_2['date']=pd.to_datetime(ohlcv['date'],unit='ms')
+    ohlcv_2=pd.DataFrame(ohlcv_2, columns=['date','open', 'high', 'low', 'close','volume'])
     fig2 = go.Figure()
     fig2.add_trace(go.Scatter(x=ohlcv.date, 
                         y=ohlcv.media,
