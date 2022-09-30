@@ -179,14 +179,14 @@ with tab4:
     fig2.add_trace(go.Scatter(x=ohlcv.date, 
                         y=ohlcv.close.pct_change(periods=30),
                         mode='lines',
-                        marker_color='#A9A9A9',
+                        marker_color='#FF0000',
                         name=option,
                         line=dict(width=1)))
 
     fig2.add_trace(go.Scatter(x=ohlcv_2.date, 
                         y=ohlcv_2.close.pct_change(periods=30),
                         mode='lines',
-                        marker_color='#F2D7D5',
+                        marker_color='#00FF00',
                         name=symbol2,
                         line=dict(width=1)))
 
