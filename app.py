@@ -131,7 +131,8 @@ fig.add_trace(go.Scatter(x=ohlcv.date,
 fig.add_trace(go.Bar(x=ohlcv.date,
                     y=ohlcv.volume,
                     showlegend=False,
-                    marker_color='#FF0000'), 
+                    marker_color='#FF0000',
+                    marker_line_width=0), 
                     row=2, col=1)
 
 fig.update(layout_xaxis_rangeslider_visible=False)
