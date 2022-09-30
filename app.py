@@ -168,7 +168,7 @@ with tab3:
 with tab4:
     symbol2 = st.radio(
     "Seleccionar una criptomoneda para comparar su tendencia",
-    code_list, horizontal=True)
+    symbol_list, horizontal=True)
     
     ftx_ohlcv_2 = ftx.fetch_ohlcv(symbol=symbol2, timeframe=timeframe, since=from_ts, limit=limit)# se busca el registro histórico
     
