@@ -169,11 +169,13 @@ with tab4:
     "Seleccionar una criptomoneda para comparar su tendencia",code_list, horizontal=True)
 
     comp=dic_symbol[symbol2]
+
     ftx_ohlcv_2 = ftx.fetch_ohlcv(symbol=comp, timeframe=timeframe, since=from_ts, limit=limit)# se busca el registro histórico
     ohlcv_2=pd.DataFrame(ftx_ohlcv_2, columns=['date','open', 'high', 'low', 'close','volume'])
     ohlcv_2['date']=pd.to_datetime(ohlcv['date'],unit='ms')
-    ohlcv_2=pd.DataFrame(ohlcv_2, columns=['date','open', 'high', 'low', 'close','volume'])
+ 
     fig2 = go.Figure()
+    
     fig2.add_trace(go.Scatter(x=ohlcv.date, 
                         y=ohlcv.close,
                         mode='lines',
