@@ -38,6 +38,8 @@ genre = st.radio(
     timeframe_list, horizontal=True)
 '------------------------------------------------------------------------------------------'
 
+
+
 symbol=dic_symbol[option] # simbolo de la criptomoneda seleccionada por usuario
 timeframe=genre # intervalo de tiempo seleccionado por usuario
 
@@ -47,6 +49,7 @@ now = datetime.now()
 from_ts = ftx.parse8601(now) # busqueda de historial ohlcv para la cripto seleccionada actualizado al momento actual
 limit=10000 # cantidad de datos a brindar por el historial ohlcv
 ftx_ohlcv = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit=limit)# se busca el registro histórico
+ftx_ohlcv_2 = ftx.fetch_ohlcv(symbol=symbol, timeframe=timeframe, since=from_ts, limit=limit)# se busca el registro histórico
 
 # se crea la tabla para graficar el historial ohlcv
 
@@ -99,6 +102,11 @@ col2.metric(label_volume, millify(volume))
 col3.metric(label_var, millify(varianza))
 col4.metric(label_media, media) 
 
+#se crea el historail para un segunda cripto comparable
+
+
+
+
 '------------------------------------------------------------------------------------------'
 # se crea el grafico tipo candle con el historico de precio y media movil y volúmen
 fig = make_subplots(rows=2, cols=1, 
@@ -133,9 +141,10 @@ fig.update_xaxes(showgrid=False)
 fig.update_yaxes(showgrid=True, gridwidth=0.1, gridcolor='#F2D7D5')
 
 
+
 # se crean las tabs para mostrar las tablas, caluculadora y gráficos
 
-tab1, tab2, tab3 , tab4= st.tabs(["Tabla Criptomonedas","Calculadora","Gráfico Histórico", "Tabla Histórica"])
+tab1, tab2, tab3 , tab4,tab5= st.tabs(["Tabla Criptomonedas","Calculadora","Gráfico Histórico", "Gráfico Comparable","Tabla Histórica"])
 
 with tab1:
     st.dataframe(tickers,use_container_width=True)
@@ -156,8 +165,31 @@ with tab3:
     expander = st.expander(str("Hitos en la historia de "+dic_name[option]))
     hitos=dic_hitos[option]
     expander.write(hitos)
-
 with tab4:
+    symbol2 = st.radio(
+    "Seleccionar una criptomoneda para comparar su tendencia",
+    code_list, horizontal=True)
+    
+    ftx_ohlcv_2 = ftx.fetch_ohlcv(symbol=symbol2, timeframe=timeframe, since=from_ts, limit=limit)# se busca el registro histórico
+    
+    ohlcv_2=pd.DataFrame(ftx_ohlcv_2, columns=['date','open', 'high', 'low', 'close','volume'])
+    fig2 = go.Figure()
+    fig2.add_trace(go.Scatter(x=ohlcv.date, 
+                        y=ohlcv.media,
+                        mode='lines',
+                        marker_color='#A9A9A9',
+                        name=symbol,
+                        line=dict(width=1)))
+
+    fig2.add_trace(go.Scatter(x=ohlcv_2.date, 
+                        y=ohlcv.close,
+                        mode='lines',
+                        marker_color='#F2D7D5',
+                        sname=symbol2,
+                        line=dict(width=1)))
+
+
+with tab5:
     st.dataframe(ohlcv,use_container_width=True)
 
 '                                                                                             '
