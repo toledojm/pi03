@@ -131,7 +131,7 @@ fig.add_trace(go.Scatter(x=ohlcv.date,
 fig.add_trace(go.Bar(x=ohlcv.date,
                     y=ohlcv.volume,
                     showlegend=False,
-                    marker_color='#ff0000'), 
+                    marker_color='#FF0000'), 
                     row=2, col=1)
 
 fig.update(layout_xaxis_rangeslider_visible=False)
@@ -181,14 +181,14 @@ with tab4:
                         mode='lines',
                         marker_color='#FF0000',
                         name=option,
-                        line=dict(width=1)))
+                        line=dict(width=0.8)))
 
     fig2.add_trace(go.Scatter(x=ohlcv_2.date, 
                         y=ohlcv_2.close.pct_change(periods=30),
                         mode='lines',
                         marker_color='#00FF00',
                         name=symbol2,
-                        line=dict(width=1)))
+                        line=dict(width=0.8)))
 
     fig2.update_xaxes(showgrid=False)
     fig2.update_yaxes(showgrid=False)
