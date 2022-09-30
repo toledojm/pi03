@@ -177,10 +177,10 @@ with tab4:
     ohlcv_2=pd.DataFrame(ohlcv_2, columns=['date','open', 'high', 'low', 'close','volume'])
     fig2 = go.Figure()
     fig2.add_trace(go.Scatter(x=ohlcv.date, 
-                        y=ohlcv.media,
+                        y=ohlcv.close,
                         mode='lines',
                         marker_color='#A9A9A9',
-                        name=symbol,
+                        name=option,
                         line=dict(width=1)))
 
     fig2.add_trace(go.Scatter(x=ohlcv_2.date, 
