@@ -165,8 +165,8 @@ with tab3:
     hitos=dic_hitos[option]
     expander.write(hitos)
 with tab4:
-    symbol2 = st.radio(
-    "Seleccionar una criptomoneda para comparar su tendencia",code_list, horizontal=True)
+    symbol2 = st.radio(str("Seleccionar una criptomoneda para comparar su tendencia contra " +dic_name[option])
+    ,code_list, horizontal=True)
 
     comp=dic_symbol[symbol2]
 
